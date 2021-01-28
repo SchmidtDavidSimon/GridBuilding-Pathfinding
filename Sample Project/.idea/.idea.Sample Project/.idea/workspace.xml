@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b34e701d-76c8-4edb-b32c-1a547d688242" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Structure.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlacementHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Placements/StreetPlacement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Placements/SpecialPlacement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Grid/C++/GridNew.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/StructureSelector.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E414E10B-FE5F-4572-9FF1-22F3359DE21B/41/352ea4cd/Object.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/Scripts/Placement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AudioPlayer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/TemporaryStructureGroup1.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WeightedStructureGroup.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/TemporaryStructureGroup.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/StreetCalculation.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GridExtention.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GridExtension.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/StructurePlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/StreetPlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/StructureFixer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HousePlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Placement/HousePlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Placement/StreetPlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Placement/StructurePlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameSpace/AudioPlayer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameSpace/Input.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/TemporaryStructureGroup.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/WeightedStructureGroup.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/StructureSelector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameSpace/Placement/StructurePlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameSpace/Placement/StreetPlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameSpace/Placement/HousePlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameSpace/Placement/StructureFactory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameSpace/Game.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/AudioPlayer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Input.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Factories/StreetFactory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/StructurePlacer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Factories/HouseFactory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Factories/StructureFactory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Factories/StructurePlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Factories/StreetPlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Factories/HousePlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/GridSearch.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/StructureHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Structure.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Placements/SpecialPlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Placements/HousePlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Placements/StreetPlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Placements/StructurePlacement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlacementHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/GridExtension.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Grid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Point.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/C++/Point.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/C++/GridNew.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1nYkm5sb4fuls9C10y7gAERXuK7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.45110822" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.29986963" />
+    <property name="Discover.Launch.Via.Unity" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="XThreadsFramesViewSplitterKey" value="0.3884058" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="18152">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" value="18152" />
+      <option name="selectedOptions">
+        <set />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="selectedOptions">
+        <set />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b34e701d-76c8-4edb-b32c-1a547d688242" name="Default Changelist" comment="" />
+      <created>1611574570239</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611574570239</updated>
+      <workItem from="1611574577350" duration="13046000" />
+      <workItem from="1611652081653" duration="7938000" />
+      <workItem from="1611667383126" duration="126000" />
+      <workItem from="1611667534953" duration="175000" />
+      <workItem from="1611667729915" duration="12715000" />
+      <workItem from="1611735397750" duration="18085000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="798" height="371" key="GridCell.Tab.0.bottom" timestamp="1611756173316">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.0.bottom/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173316" />
+    <state width="798" height="371" key="GridCell.Tab.0.center" timestamp="1611756173316">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.0.center/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173316" />
+    <state width="798" height="371" key="GridCell.Tab.0.left" timestamp="1611756173316">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.0.left/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173316" />
+    <state width="798" height="371" key="GridCell.Tab.0.right" timestamp="1611756173316">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.0.right/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173316" />
+    <state width="798" height="371" key="GridCell.Tab.1.bottom" timestamp="1611756173316">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.1.bottom/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173316" />
+    <state width="798" height="371" key="GridCell.Tab.1.center" timestamp="1611756173316">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.1.center/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173316" />
+    <state width="798" height="371" key="GridCell.Tab.1.left" timestamp="1611756173316">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.1.left/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173316" />
+    <state width="798" height="371" key="GridCell.Tab.1.right" timestamp="1611756173316">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.1.right/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173316" />
+    <state width="798" height="371" key="GridCell.Tab.2.bottom" timestamp="1611756173317">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.2.bottom/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173317" />
+    <state width="798" height="371" key="GridCell.Tab.2.center" timestamp="1611756173317">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.2.center/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173317" />
+    <state width="798" height="371" key="GridCell.Tab.2.left" timestamp="1611756173316">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.2.left/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173316" />
+    <state width="798" height="371" key="GridCell.Tab.2.right" timestamp="1611756173317">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.2.right/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173317" />
+    <state width="798" height="371" key="GridCell.Tab.3.bottom" timestamp="1611756173317">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.3.bottom/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173317" />
+    <state width="798" height="371" key="GridCell.Tab.3.center" timestamp="1611756173317">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.3.center/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173317" />
+    <state width="798" height="371" key="GridCell.Tab.3.left" timestamp="1611756173317">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.3.left/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173317" />
+    <state width="798" height="371" key="GridCell.Tab.3.right" timestamp="1611756173317">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state width="798" height="371" key="GridCell.Tab.3.right/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611756173317" />
+    <state x="-998" y="221" key="SettingsEditor" timestamp="1611583776938">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state x="-998" y="221" key="SettingsEditor/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611583776938" />
+    <state x="-755" y="306" width="666" height="534" key="find.popup" timestamp="1611680418660">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state x="-755" y="306" width="666" height="534" key="find.popup/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611680418660" />
+    <state x="-766" y="271" key="run.anything.popup" timestamp="1611670474369">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state x="-766" y="271" key="run.anything.popup/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611670474369" />
+    <state x="-759" y="282" width="672" height="678" key="search.everywhere.popup" timestamp="1611680446159">
+      <screen x="-2560" y="53" width="2560" height="1040" />
+    </state>
+    <state x="-759" y="282" width="672" height="678" key="search.everywhere.popup/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611680446159" />
+  </component>
+</project>
