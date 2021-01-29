@@ -114,13 +114,14 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="18152">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="18152" />
+      <option name="pid" />
       <option name="selectedOptions">
         <set />
       </option>
@@ -150,6 +151,8 @@
       <workItem from="1611667534953" duration="175000" />
       <workItem from="1611667729915" duration="12715000" />
       <workItem from="1611735397750" duration="18085000" />
+      <workItem from="1611850861123" duration="1777000" />
+      <workItem from="1611907612328" duration="5736000" />
     </task>
     <servers />
   </component>
@@ -246,13 +249,13 @@
       <screen x="-2560" y="53" width="2560" height="1040" />
     </state>
     <state x="-755" y="306" width="666" height="534" key="find.popup/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611680418660" />
-    <state x="-766" y="271" key="run.anything.popup" timestamp="1611670474369">
+    <state x="-766" y="271" key="run.anything.popup" timestamp="1611913062784">
       <screen x="-2560" y="53" width="2560" height="1040" />
     </state>
-    <state x="-766" y="271" key="run.anything.popup/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611670474369" />
-    <state x="-759" y="282" width="672" height="678" key="search.everywhere.popup" timestamp="1611680446159">
+    <state x="-766" y="271" key="run.anything.popup/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611913062784" />
+    <state x="-759" y="282" width="672" height="678" key="search.everywhere.popup" timestamp="1611908349099">
       <screen x="-2560" y="53" width="2560" height="1040" />
     </state>
-    <state x="-759" y="282" width="672" height="678" key="search.everywhere.popup/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611680446159" />
+    <state x="-759" y="282" width="672" height="678" key="search.everywhere.popup/0.40.1920.1040/-2560.53.2560.1040@-2560.53.2560.1040" timestamp="1611908349099" />
   </component>
 </project>
