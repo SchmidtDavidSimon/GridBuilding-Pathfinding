@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef8d65f367b9c64fb70046ce3d0a445, type: 3}
+  m_Name: Street
+  m_EditorClassIdentifier: 
+  width: 1
+  height: 1
+  models: []
+  hasSpecialBuildInstructions: 1
+  buildInstructions: {fileID: 11400000, guid: a0d1efaa78f22724ab285efc83e4cc46, type: 2}
+  type: 0
+  allowsMovement: 1
+  allowedMovementTypes: 0000000001000000
+  movementCost: 10
+  hasAppeal: 0
+  appeal: 0
+  overwritableContentTypes: 03000000

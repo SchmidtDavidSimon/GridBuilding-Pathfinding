@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4c38ca4f6f63c48820c7efa0dfd176, type: 3}
+  m_Name: Vegetation
+  m_EditorClassIdentifier: 
+  requiresCellContentTypeAsNeighbor: 0
+  neighborRequirements: 
+  usesWeightedModels: 0
+  models:
+  - {fileID: 1231750990164085603, guid: aed2aed4bcf2ca849b78ed9886eb775b, type: 3}
+  - {fileID: 2955873173738021753, guid: 89c8c1683471988428f3493e670af149, type: 3}
+  - {fileID: 1106894241150469068, guid: 4b6c3a1c5d79ee74aacaffa4073f334f, type: 3}
+  - {fileID: 628111111329996284, guid: b251aac2e265df74f91db1dee1baee73, type: 3}
+  - {fileID: 7925051415129203009, guid: 22e716ef34672e9429129cbfd0853e95, type: 3}
+  - {fileID: 6806877314895711884, guid: 4a980b701bf56d344a17e0247a24ff8d, type: 3}
+  - {fileID: 6135660522080923414, guid: cfa659a61039840438021d3380477cd7, type: 3}
+  - {fileID: 8961060414691119292, guid: f04715c35df96d24daf46814db582a15, type: 3}
+  - {fileID: 4245984584134214309, guid: c8c46a24f1192964a9c4a213493c1c7b, type: 3}
+  - {fileID: 2732043988329127880, guid: bb8a349e47100e3438e3350c256e20e3, type: 3}
+  weightedModels: {fileID: 0}
