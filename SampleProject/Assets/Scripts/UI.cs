@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Grid;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,6 +42,11 @@ public class UI : MonoBehaviour
         {
             ResetButtonColor();
             SetSelectedButton(residence1, CellContentType.Residence1);
+        });
+        residence2.onClick.AddListener(() =>
+        {
+            ResetButtonColor();
+            SetSelectedButton(residence2, CellContentType.Residence2);
         });
         special1.onClick.AddListener(() =>
         {

@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ef8d65f367b9c64fb70046ce3d0a445, type: 3}
-  m_Name: Specials
+  m_Name: LargeResidence
   m_EditorClassIdentifier: 
-  width: 1
-  height: 1
+  width: 2
+  height: 2
   models: []
   hasSpecialBuildInstructions: 1
-  buildInstructions: {fileID: 11400000, guid: f44fca8f113d38249ac9103abd6e2261, type: 2}
-  type: 3
+  buildInstructions: {fileID: 11400000, guid: 697d91f8f83307b469e25b7190d25741, type: 2}
+  type: 2
   allowsMovement: 0
   allowedMovementTypes: 
   movementCost: 0
   hasAppeal: 1
-  appeal: 20
+  appeal: 5
   overwritableContentTypes: 04000000

@@ -54,9 +54,9 @@ namespace ScriptableObjects
         }
         
 
-        public ModelInfo SelectModel(Vector3Int pos)
+        public ModelInfo SelectModel(Vector3Int pos, int width, int height)
         {
-            var info = CreateModelInfo(pos);
+            var info = CreateModelInfo(pos, width, height);
             SaveModelInfo(pos, info);
             return info;
         }
@@ -70,12 +70,12 @@ namespace ScriptableObjects
             _currentModelInfos.Add(pos, info);
         }
 
-        protected virtual ModelInfo CreateModelInfo(Vector3Int pos) => throw new NotImplementedException();
+        protected virtual ModelInfo CreateModelInfo(Vector3Int pos, int width, int height) => throw new NotImplementedException();
 
-        public bool NeedsNewModel(Vector3Int pos,CellContentType neighbor)
+        public bool NeedsNewModel(Vector3Int pos,CellContentType neighbor, int width, int height)
             => changesWithCertainNeighbor 
                && NeighborsToCheck.Any(contentType => contentType == neighbor)
-               && _currentModelInfos[pos] != CreateModelInfo(pos);
+               && _currentModelInfos[pos] != CreateModelInfo(pos, width, height);
 
         public virtual void CorrectPath(ref List<Vector3Int> path) { }
     }

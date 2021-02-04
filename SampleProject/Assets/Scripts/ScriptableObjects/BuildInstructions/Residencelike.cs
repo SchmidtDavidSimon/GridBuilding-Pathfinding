@@ -15,10 +15,10 @@ namespace ScriptableObjects.BuildInstructions
 
         #region public methods
 
-        protected override ModelInfo CreateModelInfo(Vector3Int pos)
+        protected override ModelInfo CreateModelInfo(Vector3Int pos, int width, int height)
         {
-            var neighbors = GridExtension.GetNeighborTypes(pos);
-            var streetCount = neighbors.Count(x => x == CellContentType.Street);
+            var neighbors = CalculateStreetBoundaries(pos, width, height);
+            var streetCount = neighbors.Count(x => x);
             switch (streetCount)
             {
                 case 0:
@@ -46,6 +46,75 @@ namespace ScriptableObjects.BuildInstructions
         #region private methods
 
         #region utilities
+        
+        private bool[] CalculateStreetBoundaries(Vector3Int pos, int width, int height)
+        {
+            var retVal = new [] {true, true,true,true};
+            //left
+            //SideNeighborsStreet(pos.x, pos.z, height);
+            if (pos.x > 0)
+            {
+                for (var i = pos.z; i < height; i++)
+                {
+                    if (GridExtension.GetCellType(new Vector3Int(pos.x-1,0,i)) == CellContentType.Street) continue;
+                    retVal[0] = false;
+                    break;
+                }
+            }
+            else
+            {
+                retVal[0] = false;
+            }
+            //top
+            if (pos.z < GridExtension.GridHeight - 1)
+            {
+                for (var i = pos.x; i < width; i++)
+                {
+                    if (GridExtension.GetCellType(new Vector3Int(pos.z+1,0,i)) == CellContentType.Street) continue;
+                    retVal[1] = false;
+                    break;
+                }
+            }
+            else
+            {
+                retVal[1] = false;
+            }
+            //right
+            if (pos.x < GridExtension.GridWidth - 1)
+            {
+                for (var i = pos.z; i < height; i++)
+                {
+                    if (GridExtension.GetCellType(new Vector3Int(pos.x+1,0,i)) == CellContentType.Street) continue;
+                    retVal[2] = false;
+                    break;
+                }
+            }
+            else
+            {
+                retVal[2] = false;
+            }
+            //down
+            if (pos.z > 0)
+            {
+                for (var i = pos.x; i < width; i++)
+                {
+                    if (GridExtension.GetCellType(new Vector3Int(pos.z-1,0,i)) == CellContentType.Street) continue;
+                    retVal[3] = false;
+                    break;
+                }
+            }
+            else
+            {
+                retVal[3] = false;
+            }
+
+            return retVal;
+        }
+
+        private bool SideNeighborsStreet(int pos1, int pos2, int houseDimension, int? gridEnd = null)
+        {
+            throw new NotImplementedException();
+        }
 
         private int CalculateYRotation(List<int> allowedYRotations)
         {
@@ -62,22 +131,22 @@ namespace ScriptableObjects.BuildInstructions
 
         #region selectors
 
-        private ModelInfo SomeSides(CellContentType[] neighbors)
+        private ModelInfo SomeSides(bool[] neighbors)
         {
             var allowedYRotations = new List<int>();
-            if (neighbors[0] == CellContentType.Street)
+            if (neighbors[0])
             {
                 allowedYRotations.Add(90);
             }
-            if (neighbors[1] == CellContentType.Street)
+            if (neighbors[1])
             {
                 allowedYRotations.Add(180);
             }
-            if (neighbors[2] == CellContentType.Street)
+            if (neighbors[2])
             {
                 allowedYRotations.Add(270);
             }
-            if (neighbors[3] == CellContentType.Street)
+            if (neighbors[3])
             {
                 allowedYRotations.Add(0);
             }

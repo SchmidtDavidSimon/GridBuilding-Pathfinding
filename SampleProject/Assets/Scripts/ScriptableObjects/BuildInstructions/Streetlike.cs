@@ -39,7 +39,7 @@ namespace ScriptableObjects.BuildInstructions
 
         #region public methods
 
-        protected override ModelInfo CreateModelInfo(Vector3Int pos)
+        protected override ModelInfo CreateModelInfo(Vector3Int pos, int width, int height)
         {
             var neighbors = GridExtension.GetNeighborTypes(pos);
             var streetCount = neighbors.Count(x => x == CellContentType.Street);

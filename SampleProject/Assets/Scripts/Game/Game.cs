@@ -48,14 +48,6 @@ namespace Game
             ui.contentSelected += _placementHandler.SetSelectedContent;
             _input.mouseHold += _placementHandler.Place;
             _input.mouseUp += _placementHandler.FinishPlacement;
-            
-            _placementHandler.SetSelectedContent(CellContentType.Street);
-            _placementHandler.Place(new Vector3Int(8, 0, 8));
-            _placementHandler.FinishPlacement();
-            _placementHandler.SetSelectedContent(CellContentType.Residence1);
-            _placementHandler.Place(new Vector3Int(8, 0, 9));
-            _placementHandler.FinishPlacement();
-            
         }
 
         public void DestroyGo(GameObject gO)

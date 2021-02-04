@@ -23,4 +23,4 @@ MonoBehaviour:
   movementCost: 10
   hasAppeal: 0
   appeal: 0
-  overwritableContentTypes: 03000000
+  overwritableContentTypes: 04000000

@@ -12,7 +12,7 @@ namespace ScriptableObjects.BuildInstructions
         
         #region public methods
 
-        protected override ModelInfo CreateModelInfo(Vector3Int pos)
+        protected override ModelInfo CreateModelInfo(Vector3Int pos, int width, int height)
         {
             return new ModelInfo
             {

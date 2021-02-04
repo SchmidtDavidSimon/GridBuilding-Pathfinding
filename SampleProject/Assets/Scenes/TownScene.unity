@@ -1954,6 +1954,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 352b51d883b20304f9046787ad1bfda7, type: 2}
   - {fileID: 11400000, guid: d9fb016bd77eef340a1a585f87933c6b, type: 2}
   - {fileID: 11400000, guid: b8db5d6a840eacb4db0aac94c1e6f9e1, type: 2}
+  - {fileID: 11400000, guid: ab5f25d1d182c71458e90a2d0e05799c, type: 2}
   ui: {fileID: 1840728084}
 --- !u!4 &1592703120
 Transform:

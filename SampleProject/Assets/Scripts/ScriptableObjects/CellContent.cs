@@ -42,12 +42,12 @@ namespace ScriptableObjects
         public GameObject GetModel(Vector3Int pos)
         {
             if (!hasSpecialBuildInstructions) return Instantiate(models[Random.Range(0, models.Count - 1)], pos, Quaternion.identity);
-            var info = buildInstructions.SelectModel(pos);
+            var info = buildInstructions.SelectModel(pos, width, height);
             return Instantiate(info.model, pos, info.rotation);
         }
 
         public bool NeedsNewModel(Vector3Int pos, CellContentType neighbor) 
-            => hasSpecialBuildInstructions && buildInstructions.NeedsNewModel(pos, neighbor);
+            => hasSpecialBuildInstructions && buildInstructions.NeedsNewModel(pos, neighbor, width, height);
 
         public void CorrectPath(ref List<Vector3Int> path)
         {

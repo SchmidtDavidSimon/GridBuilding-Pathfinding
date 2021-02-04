@@ -5,10 +5,11 @@ public enum MovementType
 }
 public enum CellContentType
 {
-    Street = 0,
-    Residence1 = 1,
-    Special1 = 2,
-    Vegetation = 3, 
+    Street,
+    Residence1,
+    Residence2,
+    Special1,
+    Vegetation, 
     OutOfBounds,
     None = -1
 }
