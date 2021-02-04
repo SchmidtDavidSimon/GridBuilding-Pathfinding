@@ -12,7 +12,7 @@ namespace Grid
         private static Grid _appealGrid;
         public GridExtension(int width, int height)
         {
-            _typeGrid = new Grid(width, height);
+            _typeGrid = new Grid(width, height, (int) CellContentType.None);
             _costGrid = new Grid(width, height, int.MaxValue);
             _appealGrid = new Grid(width,height,0);
         }

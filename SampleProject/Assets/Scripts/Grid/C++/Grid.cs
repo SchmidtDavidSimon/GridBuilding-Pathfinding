@@ -166,7 +166,6 @@ namespace Grid
             {
                 var currentPoint = GetClosestPoint(pointsToCheck, priorityDictionary);
                 pointsToCheck.Remove(currentPoint);
-                Debug.Log(currentPoint.ToString() + endPoint);
                 if (currentPoint.Equals(endPoint))
                 {
                     path = GeneratePath(parentsDictionary, currentPoint);

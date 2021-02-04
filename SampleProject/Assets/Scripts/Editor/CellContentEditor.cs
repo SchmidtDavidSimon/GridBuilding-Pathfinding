@@ -73,7 +73,7 @@ namespace Editor
                 EditorGUILayout.PropertyField(allowedMovementTypes, new GUIContent("Allowed Movement Types"));
                 EditorGUILayout.PropertyField(movementCost, new GUIContent("Movement Cost"));
             }
-            EditorGUILayout.PropertyField(overwritableContentTypes, new GUIContent("Overwritable Content","When in placement mode, these content types will be overwritten on select. Own type does not need to be included"));
+            EditorGUILayout.PropertyField(overwritableContentTypes, new GUIContent("Overwritable Content","When in placement mode, these content types will be overwritten on select. Own type & type.None does not need to be included"));
             EditorGUILayout.PropertyField(hasAppeal, new GUIContent("Has Appeal"));
             if (hasAppeal.boolValue)
             {

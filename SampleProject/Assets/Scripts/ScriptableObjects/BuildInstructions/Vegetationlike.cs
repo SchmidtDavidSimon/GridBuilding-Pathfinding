@@ -7,7 +7,7 @@ namespace ScriptableObjects.BuildInstructions
     public class Vegetationlike : CellContentBuildInstructions
     {
         [SerializeField] private List<GameObject> models;
-        [SerializeField] private WeightedModelList weightedModels;
+        [SerializeField] private List<WeightedModel> weightedModels;
         
         
         #region public methods

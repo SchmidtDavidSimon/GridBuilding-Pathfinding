@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ScriptableObjects.BuildInstructions;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,20 +11,32 @@ namespace ScriptableObjects
         [SerializeField] protected bool requiresCellContentTypeAsNeighbor;
         [SerializeField] protected List<CellContentType> neighborRequirements;
         [SerializeField] protected bool usesWeightedModels;
+        
         [SerializeField] private bool changesWithCertainNeighbor;
         [SerializeField] private List<CellContentType> neighborsToCheck;
-        protected Dictionary<Vector3Int,ModelInfo> currentModelInfos = new Dictionary<Vector3Int,ModelInfo>();
+        
+        private readonly Dictionary<Vector3Int,ModelInfo> _currentModelInfos = new Dictionary<Vector3Int,ModelInfo>();
+
+        private List<CellContentType> NeighborsToCheck
+        {
+            get
+            {
+                var retVal = new List<CellContentType>();
+                retVal.AddRange(neighborsToCheck);
+                retVal.Add(CellContentType.None);
+                return retVal;
+            }
+        }
 
         public bool RequiresCellContentTypeAsNeighbor => requiresCellContentTypeAsNeighbor;
         public List<CellContentType> NeighborRequirements => neighborRequirements;
-        public bool ChangesWithCertainNeighbor => changesWithCertainNeighbor;
 
-        protected GameObject SelectWeightedModel(WeightedModelList weightedModels)
+        protected GameObject SelectWeightedModel(List<WeightedModel> weightedModels)
         {
-            var weights = new float[weightedModels.value.Count];
-            for (var i = 0; i < weightedModels.value.Count; i++)
+            var weights = new float[weightedModels.Count];
+            for (var i = 0; i < weightedModels.Count; i++)
             {
-                weights[i] =  weightedModels.value[i].weight;
+                weights[i] =  weightedModels[i].weight;
             }
 
             var weightSum = weights.Sum();
@@ -35,11 +46,11 @@ namespace ScriptableObjects
             {
                 if (randomValue >= temp && randomValue < temp + weights[i])
                 {
-                    return weightedModels.value[i].prefab;
+                    return weightedModels[i].prefab;
                 }
                 temp += weights[i];
             }
-            return weightedModels.value[0].prefab;
+            return weightedModels[0].prefab;
         }
         
 
@@ -52,17 +63,20 @@ namespace ScriptableObjects
 
         private void SaveModelInfo(Vector3Int pos, ModelInfo info)
         {
-            if (currentModelInfos.ContainsKey(pos))
+            if (_currentModelInfos.ContainsKey(pos))
             {
-                currentModelInfos.Remove(pos);
+                _currentModelInfos.Remove(pos);
             }
-            currentModelInfos.Add(pos, info);
+            _currentModelInfos.Add(pos, info);
         }
 
         protected virtual ModelInfo CreateModelInfo(Vector3Int pos) => throw new NotImplementedException();
 
         public bool NeedsNewModel(Vector3Int pos,CellContentType neighbor)
-            => neighborsToCheck.Any(contentType => contentType == neighbor)
-               && currentModelInfos[pos] != CreateModelInfo(pos);
+            => changesWithCertainNeighbor 
+               && NeighborsToCheck.Any(contentType => contentType == neighbor)
+               && _currentModelInfos[pos] != CreateModelInfo(pos);
+
+        public virtual void CorrectPath(ref List<Vector3Int> path) { }
     }
 }

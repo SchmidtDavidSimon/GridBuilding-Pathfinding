@@ -24,8 +24,8 @@ MonoBehaviour:
     threeWay: {fileID: 2384947387477557946, guid: 2524a8437a2d4394da7f7a0546a71f3d, type: 3}
     fourWay: {fileID: 3351635067702010651, guid: f4402828bce58b54791119f89fa2df61, type: 3}
   weightedModels:
-    deadEnds: {fileID: 0}
-    straights: {fileID: 0}
-    corners: {fileID: 0}
-    threeWays: {fileID: 0}
-    fourWays: {fileID: 0}
+    deadEnds: []
+    straights: []
+    corners: []
+    threeWays: []
+    fourWays: []

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Grid;
 using UnityEngine;
@@ -23,11 +24,11 @@ namespace ScriptableObjects.BuildInstructions
         [Serializable]
         private struct WeightedModels
         {
-            public WeightedModelList deadEnds;
-            public WeightedModelList straights;
-            public WeightedModelList corners;
-            public WeightedModelList threeWays;
-            public WeightedModelList fourWays;
+            public List<WeightedModel> deadEnds;
+            public List<WeightedModel> straights;
+            public List<WeightedModel> corners;
+            public List<WeightedModel> threeWays;
+            public List<WeightedModel> fourWays;
         }
 
         #endregion

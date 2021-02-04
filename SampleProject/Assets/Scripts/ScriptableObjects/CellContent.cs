@@ -31,8 +31,10 @@ namespace ScriptableObjects
         {
             get
             {
-                var retVal = overwritableContentTypes;
+                var retVal = new List<CellContentType>();
+                retVal.AddRange(overwritableContentTypes);
                 retVal.Add(type);
+                retVal.Add(CellContentType.None);
                 return retVal;
             }
         }
@@ -46,6 +48,13 @@ namespace ScriptableObjects
 
         public bool NeedsNewModel(Vector3Int pos, CellContentType neighbor) 
             => hasSpecialBuildInstructions && buildInstructions.NeedsNewModel(pos, neighbor);
-        
+
+        public void CorrectPath(ref List<Vector3Int> path)
+        {
+            if (hasSpecialBuildInstructions)
+            {
+                buildInstructions.CorrectPath(ref path);
+            }
+        }
     }
 }
