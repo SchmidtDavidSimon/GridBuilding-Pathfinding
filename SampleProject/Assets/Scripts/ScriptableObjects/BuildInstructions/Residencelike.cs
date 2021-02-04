@@ -32,6 +32,15 @@ namespace ScriptableObjects.BuildInstructions
             }
         }
 
+        public override void CorrectPath(ref List<Vector3Int> path)
+        {
+            for (var i = path.Count -1; i >= 0; i--)
+            {
+                if (GridExtension.GetNeighborTypes(path[i]).Count(neighbor => neighbor == CellContentType.Street) > 0) continue;
+                path.RemoveAt(i);
+            }
+        }
+
         #endregion
 
         #region private methods
@@ -43,8 +52,8 @@ namespace ScriptableObjects.BuildInstructions
             int y;
             do
             {
-                y = 90 * Random.Range(1, 5);
-            } while (allowedYRotations.Contains(y));
+                y = 90 * Random.Range(0, 5);
+            } while (!allowedYRotations.Contains(y));
 
             return y;
         }
@@ -58,19 +67,19 @@ namespace ScriptableObjects.BuildInstructions
             var allowedYRotations = new List<int>();
             if (neighbors[0] == CellContentType.Street)
             {
-                allowedYRotations.Add(270);
+                allowedYRotations.Add(90);
             }
             if (neighbors[1] == CellContentType.Street)
             {
-                allowedYRotations.Add(0);
+                allowedYRotations.Add(180);
             }
             if (neighbors[2] == CellContentType.Street)
             {
-                allowedYRotations.Add(90);
+                allowedYRotations.Add(270);
             }
             if (neighbors[3] == CellContentType.Street)
             {
-                allowedYRotations.Add(180);
+                allowedYRotations.Add(0);
             }
 
             return new ModelInfo

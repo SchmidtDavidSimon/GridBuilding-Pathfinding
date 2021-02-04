@@ -183,7 +183,7 @@ public class PlacementHandler
         AddToCheckNeighbors(pos, contentsToDelete);
         Game.Game.instance.DestroyGo(_models[pos]);
         _models.Remove(pos);
-        if (contentsToDelete == Delete.Permanent && !_permanentPathContent.ContainsKey(pos))
+        if (contentsToDelete == Delete.Permanent && !_permanentPathContent.ContainsKey(pos) &&_contents[pos].Type == _selectedContent)
         {
             _permanentPathContent.Add(pos,_contents[pos]);
         }

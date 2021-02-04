@@ -44,12 +44,11 @@ public class UI : MonoBehaviour
             ResetButtonColor();
             SetSelectedButton(residence1, CellContentType.Residence1);
         });
-        // specialButton.onClick.AddListener(() =>
-        // {
-        //     ResetButtonColor();
-        //     ModifyButtonColor(specialButton);
-        //     specialSelected?.Invoke(CellContentType.Special);
-        // });
+        special1.onClick.AddListener(() =>
+        {
+            ResetButtonColor();
+            SetSelectedButton(special1, CellContentType.Special1);
+        });
     }
 
     private void ResetButtonColor()
