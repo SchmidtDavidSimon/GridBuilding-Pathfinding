@@ -17,6 +17,7 @@ namespace ScriptableObjects.BuildInstructions
 
         protected override ModelInfo CreateModelInfo(Vector3Int pos, int width, int height)
         {
+            Debug.Log(pos);
             var neighbors = CalculateStreetBoundaries(pos, width, height);
             var streetCount = neighbors.Count(x => x);
             switch (streetCount)
@@ -47,73 +48,56 @@ namespace ScriptableObjects.BuildInstructions
 
         #region utilities
         
-        private bool[] CalculateStreetBoundaries(Vector3Int pos, int width, int height)
+        private bool[] CalculateStreetBoundaries(Vector3Int pos, int width, int height) => new []
+            {
+                //left
+                SideNeighborsStreet(pos.x, pos.z, height, true),
+                //top
+                SideNeighborsStreet(pos.z,pos.x, width, false, GridExtension.GridHeight),
+                //right
+                SideNeighborsStreet(pos.x,pos.z, height,true, GridExtension.GridWidth),
+                //down
+                SideNeighborsStreet(pos.z, pos.x, width, false)
+            };
+        
+
+        private bool SideNeighborsStreet(int pos1, int pos2, int houseDimension, bool xFirst, int? gridEnd = null)
         {
-            var retVal = new [] {true, true,true,true};
-            //left
-            //SideNeighborsStreet(pos.x, pos.z, height);
-            if (pos.x > 0)
+            bool condition;
+            if (gridEnd == null)
             {
-                for (var i = pos.z; i < height; i++)
+                condition = pos1 > 0;
+            }
+            else
+            {
+                condition = pos1 < gridEnd - 1;
+            }
+            if (condition)
+            {
+                for (var i = 0; i < houseDimension; i++)
                 {
-                    if (GridExtension.GetCellType(new Vector3Int(pos.x-1,0,i)) == CellContentType.Street) continue;
-                    retVal[0] = false;
-                    break;
+                    var pos = new Vector3Int(
+                        xFirst
+                            ? gridEnd == null
+                                ? pos1 - 1
+                                : pos1 + 1
+                            : pos2 + i,
+                        0,
+                        xFirst
+                            ? pos2 + i
+                            : gridEnd == null
+                                ? pos1 - 1
+                                : pos1 + 1);
+                    if (GridExtension.CellIsOfType(pos, CellContentType.Street)) continue;
+                    return false;
                 }
             }
             else
             {
-                retVal[0] = false;
-            }
-            //top
-            if (pos.z < GridExtension.GridHeight - 1)
-            {
-                for (var i = pos.x; i < width; i++)
-                {
-                    if (GridExtension.GetCellType(new Vector3Int(pos.z+1,0,i)) == CellContentType.Street) continue;
-                    retVal[1] = false;
-                    break;
-                }
-            }
-            else
-            {
-                retVal[1] = false;
-            }
-            //right
-            if (pos.x < GridExtension.GridWidth - 1)
-            {
-                for (var i = pos.z; i < height; i++)
-                {
-                    if (GridExtension.GetCellType(new Vector3Int(pos.x+1,0,i)) == CellContentType.Street) continue;
-                    retVal[2] = false;
-                    break;
-                }
-            }
-            else
-            {
-                retVal[2] = false;
-            }
-            //down
-            if (pos.z > 0)
-            {
-                for (var i = pos.x; i < width; i++)
-                {
-                    if (GridExtension.GetCellType(new Vector3Int(pos.z-1,0,i)) == CellContentType.Street) continue;
-                    retVal[3] = false;
-                    break;
-                }
-            }
-            else
-            {
-                retVal[3] = false;
+                return false;
             }
 
-            return retVal;
-        }
-
-        private bool SideNeighborsStreet(int pos1, int pos2, int houseDimension, int? gridEnd = null)
-        {
-            throw new NotImplementedException();
+            return true;
         }
 
         private int CalculateYRotation(List<int> allowedYRotations)
