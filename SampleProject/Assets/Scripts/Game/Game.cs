@@ -52,7 +52,10 @@ namespace Game
              _placementHandler.SetSelectedContent(CellContentType.Street);
              _placementHandler.Place(new Vector3Int(8,0,5));
              _placementHandler.Place(new Vector3Int(8,0,6));
-             _placementHandler.Place(new Vector3Int(8,0,7));
+             _placementHandler.FinishPlacement();
+             _placementHandler.Place(new Vector3Int(7,0,6));
+             _placementHandler.Place(new Vector3Int(8,0,6));
+             _placementHandler.Place(new Vector3Int(7,0,6));
              _placementHandler.FinishPlacement();
         }
 

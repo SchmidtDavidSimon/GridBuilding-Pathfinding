@@ -10,6 +10,7 @@ public class PlacementHandler
     private readonly Dictionary<Vector3Int, CellContent> _contents = new Dictionary<Vector3Int, CellContent>();
     private readonly Dictionary<Vector3Int, CellContent> _temporaryContents = new Dictionary<Vector3Int, CellContent>();
     private readonly Dictionary<Vector3Int, CellContent> _positionsToCheckNeighborsOf = new Dictionary<Vector3Int, CellContent>();
+    private readonly Dictionary<Vector3Int, CellContent> _permanentPathContent = new Dictionary<Vector3Int, CellContent>();
     private readonly Dictionary<Vector3Int, GameObject> _models = new Dictionary<Vector3Int, GameObject>();
     private readonly Dictionary<CellContentType, CellContent> _contentTemplates = new Dictionary<CellContentType, CellContent>();
     
@@ -81,6 +82,7 @@ public class PlacementHandler
     {
         _startPos = null;
         PermanentizeTemporaryContents();
+        _permanentPathContent.Clear();
         Game.Game.instance.AudioPlayer.PlayPlacementSound();
     }
 
@@ -101,6 +103,10 @@ public class PlacementHandler
     private void PlaceContent(Vector3Int pos, CellContent content, bool placeTemporarily = false)
     {
         if (!ConditionsAreMet(pos, content, placeTemporarily)) return;
+        if (placeTemporarily && _permanentPathContent.ContainsKey(pos))
+        {
+            placeTemporarily = false;
+        }
 
         PlaceModel(pos, content);
         
@@ -159,7 +165,6 @@ public class PlacementHandler
     private void DeleteTemporaryContent()
     {
         var deletionArray = (from temporaryContent in _temporaryContents select temporaryContent.Key).ToArray();
-        Debug.Log(deletionArray.Length);
         foreach (var item in deletionArray)
         {
             DeleteContent(item, Delete.Temporary);
@@ -178,6 +183,10 @@ public class PlacementHandler
         AddToCheckNeighbors(pos, contentsToDelete);
         Game.Game.instance.DestroyGo(_models[pos]);
         _models.Remove(pos);
+        if (contentsToDelete == Delete.Permanent && !_permanentPathContent.ContainsKey(pos))
+        {
+            _permanentPathContent.Add(pos,_contents[pos]);
+        }
         RemoveFromDict(pos, contentsToDelete);
     }
     
