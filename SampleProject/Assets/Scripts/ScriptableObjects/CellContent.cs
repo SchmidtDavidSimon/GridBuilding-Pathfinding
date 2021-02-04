@@ -53,7 +53,7 @@ namespace ScriptableObjects
         {
             if (hasSpecialBuildInstructions)
             {
-                buildInstructions.CorrectPath(ref path);
+                buildInstructions.CorrectPath(ref path, width, height);
             }
         }
     }

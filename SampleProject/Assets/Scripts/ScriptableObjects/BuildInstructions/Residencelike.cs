@@ -17,7 +17,6 @@ namespace ScriptableObjects.BuildInstructions
 
         protected override ModelInfo CreateModelInfo(Vector3Int pos, int width, int height)
         {
-            Debug.Log(pos);
             var neighbors = CalculateStreetBoundaries(pos, width, height);
             var streetCount = neighbors.Count(x => x);
             switch (streetCount)
@@ -33,12 +32,38 @@ namespace ScriptableObjects.BuildInstructions
             }
         }
 
-        public override void CorrectPath(ref List<Vector3Int> path)
+        public override void CorrectPath(ref List<Vector3Int> path, int width, int height)
         {
+            var removedIndices = new List<int>();
             for (var i = path.Count -1; i >= 0; i--)
             {
-                if (GridExtension.GetNeighborTypes(path[i]).Count(neighbor => neighbor == CellContentType.Street) > 0) continue;
-                path.RemoveAt(i);
+                var prevPathIdx = i + 1;
+                if (prevPathIdx >= path.Count)
+                {
+                    if (CalculateStreetBoundaries(path[i], width, height).Count(neighbor => neighbor) > 0) continue;
+                    path.RemoveAt(i);
+                    removedIndices.Add(i);
+                }
+                else
+                {
+                    if (removedIndices.Contains(prevPathIdx))
+                    {
+                        if (CalculateStreetBoundaries(path[i], width, height).Count(neighbor => neighbor) > 0) continue;
+                        path.RemoveAt(i);
+                        removedIndices.Add(i);
+                    }
+                    else if (prevPathIdx < i + width || prevPathIdx < i + height)
+                    {
+                        path.RemoveAt(i);
+                        removedIndices.Add(i);
+                    }
+                    else
+                    {
+                        if (CalculateStreetBoundaries(path[i], width, height).Count(neighbor => neighbor) > 0) continue;
+                        path.RemoveAt(i);
+                        removedIndices.Add(i);
+                    }
+                }
             }
         }
 

@@ -142,7 +142,8 @@ namespace Grid
             return adjacentTypes;
         }
 
-        public List<Point> AStarSearchWithoutCost(Point startPoint, Point endPoint, AStartTypeInfo? typeInfo = null) =>
+        public List<Point> 
+            AStarSearchWithoutCost(Point startPoint, Point endPoint, AStartTypeInfo? typeInfo = null) =>
             AStarSearch(startPoint, endPoint, false, typeInfo);
 
         public List<Point> AStarSearchWithCost(Point startPoint, Point endPoint, AStartTypeInfo? typeInfo = null)
@@ -161,6 +162,9 @@ namespace Grid
             costDictionary.Add(startPoint, 0);
             priorityDictionary.Add(startPoint, 0);
             parentsDictionary.Add(startPoint, null);
+            
+            
+            if (typeInfo != null && !typeInfo.Value.useableTypes.Contains(typeInfo.Value.typeGrid[startPoint.X,startPoint.Y])) return new List<Point>();
 
             while (pointsToCheck.Count > 0)
             {

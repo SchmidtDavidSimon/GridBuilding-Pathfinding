@@ -30,6 +30,26 @@ namespace ScriptableObjects
 
         public bool RequiresCellContentTypeAsNeighbor => requiresCellContentTypeAsNeighbor;
         public List<CellContentType> NeighborRequirements => neighborRequirements;
+        
+        #region public methods
+
+        public ModelInfo SelectModel(Vector3Int pos, int width, int height)
+        {
+            var info = CreateModelInfo(pos, width, height);
+            SaveModelInfo(pos, info);
+            return info;
+        }
+        
+        public bool NeedsNewModel(Vector3Int pos,CellContentType neighbor, int width, int height)
+            => changesWithCertainNeighbor 
+               && NeighborsToCheck.Any(contentType => contentType == neighbor)
+               && _currentModelInfos[pos] != CreateModelInfo(pos, width, height);
+
+        public virtual void CorrectPath(ref List<Vector3Int> path, int width, int height) { }
+
+        #endregion
+
+        #region private methods
 
         protected GameObject SelectWeightedModel(List<WeightedModel> weightedModels)
         {
@@ -54,13 +74,6 @@ namespace ScriptableObjects
         }
         
 
-        public ModelInfo SelectModel(Vector3Int pos, int width, int height)
-        {
-            var info = CreateModelInfo(pos, width, height);
-            SaveModelInfo(pos, info);
-            return info;
-        }
-
         private void SaveModelInfo(Vector3Int pos, ModelInfo info)
         {
             if (_currentModelInfos.ContainsKey(pos))
@@ -72,11 +85,9 @@ namespace ScriptableObjects
 
         protected virtual ModelInfo CreateModelInfo(Vector3Int pos, int width, int height) => throw new NotImplementedException();
 
-        public bool NeedsNewModel(Vector3Int pos,CellContentType neighbor, int width, int height)
-            => changesWithCertainNeighbor 
-               && NeighborsToCheck.Any(contentType => contentType == neighbor)
-               && _currentModelInfos[pos] != CreateModelInfo(pos, width, height);
+        #endregion
+        
 
-        public virtual void CorrectPath(ref List<Vector3Int> path) { }
+        
     }
 }

@@ -62,12 +62,13 @@ public class PlacementHandler
     {
         if (_selectedContent == null) return;
         if (_endPos == pos) return;
-        
+
         //Delete temp content
         DeleteTemporaryContent();
         //Calculate path
         var content = _contentTemplates[(CellContentType) _selectedContent];
         var path = CalculatePath(pos, content);
+        // Debug.Log(path.Count);
         //Correct path
         content.CorrectPath(ref path);
         //Delete perm content on path
@@ -81,6 +82,7 @@ public class PlacementHandler
     public void FinishPlacement()
     {
         _startPos = null;
+        _endPos = null;
         PermanentizeTemporaryContents();
         _permanentPathContent.Clear();
         Game.Game.instance.AudioPlayer.PlayPlacementSound();
