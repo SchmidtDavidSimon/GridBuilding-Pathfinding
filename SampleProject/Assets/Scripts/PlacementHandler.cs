@@ -114,11 +114,23 @@ public class PlacementHandler
         
         if (placeTemporarily)
         {
-            _temporaryContents.Add(pos, content);
+            for (var i = 0; i < content.Width; i++)
+            {
+                for (var j = 0; j < content.Height; j++)
+                {
+                    _temporaryContents.Add(new Vector3Int(pos.x + i, pos.y, pos.z + j), content);
+                }
+            }
         }
         else
         {
-            _contents.Add(pos,content);
+            for (var i = 0; i < content.Width; i++)
+            {
+                for (var j = 0; j < content.Height; j++)
+                {
+                    _contents.Add(new Vector3Int(pos.x + i, pos.y, pos.z + j), content);
+                }
+            }
         }
 
         if (_positionsToCheckNeighborsOf.ContainsKey(pos)) return;
@@ -166,10 +178,16 @@ public class PlacementHandler
     
     private void DeleteTemporaryContent()
     {
-        var deletionArray = (from temporaryContent in _temporaryContents select temporaryContent.Key).ToArray();
+        var deletionArray = (from temporaryContent in _temporaryContents select temporaryContent).ToArray();
         foreach (var item in deletionArray)
         {
-            DeleteContent(item, Delete.Temporary);
+            for (var i = 0; i < item.Value.Width; i++)
+            {
+                for (var j = 0; j < item.Value.Height; j++)
+                {
+                    DeleteContent(new Vector3Int(item.Key.x + i, item.Key.y, item.Key.z +j), Delete.Temporary);
+                }
+            }
         }
     }
     
@@ -195,9 +213,16 @@ public class PlacementHandler
     private void DeleteContentOnPath(List<Vector3Int> path)
     {
         var deletionArray = (from pathPoint in path where _contents.ContainsKey(pathPoint) select pathPoint).ToArray();
-        foreach (var item in deletionArray)
+        foreach (var pos in deletionArray)
         {
-            DeleteContent(item, Delete.Permanent);
+            var content = _contents[pos];
+            for (var i = 0; i < content.Width; i++)
+            {
+                for (var j = 0; j < content.Height; j++)
+                {
+                    DeleteContent(new Vector3Int(pos.x + i, pos.y, pos.z + j), Delete.Permanent);
+                }
+            }
         }
     }
     
@@ -292,34 +317,41 @@ public class PlacementHandler
     
     private bool ConditionsAreMet(Vector3Int pos, CellContent content, bool placeTemporarily)
     {
-        if (!GridExtension.CellIsFree(pos) || !GridExtension.CellIsInBound(pos))
+        for (var i = 0; i < content.Width; i++)
         {
-            Debug.LogError($"Cell ({pos.x}|{pos.z}) is either not in bounds or not free");
-            return false;
-        }
+            for (var j = 0; j < content.Height; j++)
+            {
+                var posToChek = new Vector3Int(pos.x + i, pos.y, pos.z + j);
+                if (!GridExtension.CellIsFree(posToChek) || !GridExtension.CellIsInBound(posToChek))
+                {
+                    Debug.LogError($"Cell ({posToChek.x}|{posToChek.z}) is either not in bounds or not free");
+                    return false;
+                }
 
-        if (placeTemporarily)
-        {
-            if (_temporaryContents.ContainsKey(pos))
-            {
-                Debug.LogError($"Key {pos} already exists in _contents. Value: {_temporaryContents[pos]}");
-                return false;
-            }
-        }
-        else
-        {
-            if (_contents.ContainsKey(pos))
-            {
-                Debug.LogError($"Key {pos} already exists in _contents. Value: {_contents[pos]}");
-                return false;
-            }
-        }
+                if (placeTemporarily)
+                {
+                    if (_temporaryContents.ContainsKey(posToChek))
+                    {
+                        Debug.LogError($"Key {posToChek} already exists in _contents. Value: {_temporaryContents[posToChek]}");
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (_contents.ContainsKey(posToChek))
+                    {
+                        Debug.LogError($"Key {posToChek} already exists in _contents. Value: {_contents[posToChek]}");
+                        return false;
+                    }
+                }
         
-        var successful = GridExtension.SetCell(pos, content);
-        if (!successful)
-        {
-            Debug.LogError($"Trying to build a structure that reaches outside of the grid");
-            return false;
+                var successful = GridExtension.SetCell(posToChek, content);
+                if (!successful)
+                {
+                    Debug.LogError($"Trying to build a structure that reaches outside of the grid");
+                    return false;
+                }
+            }
         }
 
         return true;

@@ -49,14 +49,14 @@ namespace Game
             _input.mouseHold += _placementHandler.Place;
             _input.mouseUp += _placementHandler.FinishPlacement;
             
-              _placementHandler.SetSelectedContent(CellContentType.Street);
-              _placementHandler.Place(new Vector3Int(8,0,7));
-             // _placementHandler.Place(new Vector3Int(8,0,8));
-              _placementHandler.FinishPlacement();
-              _placementHandler.SetSelectedContent(CellContentType.Residence1);
-              _placementHandler.Place(new Vector3Int(8,0,8));
-              _placementHandler.Place(new Vector3Int(9,0,8));
-              _placementHandler.FinishPlacement();
+             //  _placementHandler.SetSelectedContent(CellContentType.Street);
+             //  _placementHandler.Place(new Vector3Int(8,0,7));
+             //  _placementHandler.Place(new Vector3Int(8,0,8));
+             //  _placementHandler.FinishPlacement();
+             //  _placementHandler.SetSelectedContent(CellContentType.Residence1);
+             //  _placementHandler.Place(new Vector3Int(8,0,8));
+             //  _placementHandler.Place(new Vector3Int(9,0,8));
+             //  _placementHandler.FinishPlacement();
         }
 
         public void DestroyGo(GameObject gO)
