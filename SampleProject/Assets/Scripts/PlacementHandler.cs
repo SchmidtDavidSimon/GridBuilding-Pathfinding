@@ -4,6 +4,9 @@ using Grid;
 using ScriptableObjects;
 using UnityEngine;
 
+/// <summary>
+/// Class to handle the placement of cell content
+/// </summary>
 public class PlacementHandler
 {
     private readonly Transform _modelParent;
@@ -17,12 +20,15 @@ public class PlacementHandler
     private CellContentType? _selectedContent;
     private Vector3Int? _startPos, _endPos;
     
+    /// <summary>
+    /// Enum to declare what kind of content should be deleted 
+    /// </summary>
     private enum Delete
     {
         Permanent,
         Temporary,
-        Any
     }
+    
     public PlacementHandler(Transform modelParent, List<CellContent> cellContents)
     {
         _modelParent = modelParent;
@@ -34,6 +40,10 @@ public class PlacementHandler
 
     #region public methods
 
+    /// <summary>
+    /// Set all cells to of the grid to the given type
+    /// </summary>
+    /// <param name="type">The given type</param>
     public void SetAll(CellContentType type)
     {
         var content = _contentTemplates[type];
@@ -56,8 +66,16 @@ public class PlacementHandler
         ReplaceNeighbors();
     }
     
+    /// <summary>
+    /// Set the selected content type to the given type
+    /// </summary>
+    /// <param name="selectedContent">The given type</param>
     public void SetSelectedContent(CellContentType? selectedContent) => _selectedContent = selectedContent;
 
+    /// <summary>
+    /// Place the selected content onto the given position
+    /// </summary>
+    /// <param name="pos">The given position</param>
     public void Place(Vector3Int pos)
     {
         if (_selectedContent == null) return;
@@ -191,7 +209,7 @@ public class PlacementHandler
         }
     }
     
-    private void DeleteContent(Vector3Int pos, Delete contentsToDelete = Delete.Any)
+    private void DeleteContent(Vector3Int pos, Delete contentsToDelete)
     {
         if (!GridExtension.EmptyCell(pos))
         {

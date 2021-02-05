@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class to handle UI interactions
+/// </summary>
 public class UI : MonoBehaviour
 {
     public Action<CellContentType?> contentSelected;
-    // public Action<CellContentType> houseSelected;
-    // public Action<CellContentType> specialSelected;
 
     [SerializeField] private Button street;
     [SerializeField] private Button residence1;
@@ -19,6 +20,9 @@ public class UI : MonoBehaviour
     private List<Button> _buttons;
     private Button _currentButton;
 
+    /// <summary>
+    /// Adding buttons to list
+    /// </summary>
     private void Awake()
     {
         _buttons = new List<Button>
@@ -31,6 +35,9 @@ public class UI : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// Adding listeners to buttons
+    /// </summary>
     private void Start()
     {
         street.onClick.AddListener(() =>
@@ -55,6 +62,9 @@ public class UI : MonoBehaviour
         });
     }
 
+   /// <summary>
+   /// Set the outline of the buttons to false
+   /// </summary>
     private void ResetButtonColor()
     {
         foreach (var button in _buttons)
@@ -63,7 +73,12 @@ public class UI : MonoBehaviour
         }
     }
     
-    private void SetSelectedButton(Button button, CellContentType cellContentType)
+   /// <summary>
+   ///  Set the selected button either to the pressed one or to null
+   /// </summary>
+   /// <param name="button">The button that was just pressed</param>
+   /// <param name="cellContentType">The content type that is selected to be build</param>
+   private void SetSelectedButton(Button button, CellContentType cellContentType)
     {
         if (button == _currentButton)
         {
@@ -78,6 +93,10 @@ public class UI : MonoBehaviour
         }
     }
 
+   /// <summary>
+   /// Set the outline of the selected button to the chosen outlineColor
+   /// </summary>
+   /// <param name="button">The just selected button</param>
     private void ModifyButtonColor(Button button)
     {
         var outline = button.GetComponent<Outline>();
