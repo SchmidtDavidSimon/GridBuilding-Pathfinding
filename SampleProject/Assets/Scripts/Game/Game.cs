@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Grid;
 using ScriptableObjects;
 using UnityEngine;
+using Utilities;
 
 namespace Game
 {
@@ -19,7 +20,7 @@ namespace Game
         [Header("Cell Contents")]
         [SerializeField] private List<CellContent> cellContents;
         [Header("Other Stuff")]
-        [SerializeField] private UI ui;
+        [SerializeField] private UI.UI ui;
     
         private Input _input;
         private PlacementHandler _placementHandler;

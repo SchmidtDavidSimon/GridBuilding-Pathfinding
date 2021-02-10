@@ -1,8 +1,16 @@
 #pragma once
-class Cell
+
+namespace Grid
 {
-public:
-	int X;
-	int Y;
-};
+	extern "C"
+	{
+		__declspec(dllexport) class Cell
+		{
+		public:
+			int X;
+			int Y;
+		};
+	}
+}
+
 

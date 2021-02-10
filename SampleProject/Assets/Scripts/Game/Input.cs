@@ -9,7 +9,7 @@ namespace Game
         public Action<Vector3Int> mouseHold;
         public Action mouseUp;
         
-        [SerializeField] private Camera mainCamera;
+        [SerializeField] private UnityEngine.Camera mainCamera;
         [SerializeField] private LayerMask groundLayer;
         
          private void Update()
