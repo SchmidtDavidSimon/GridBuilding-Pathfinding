@@ -153,30 +153,26 @@ namespace Utilities
             }
 
             PlaceModel(pos, content);
-        
-            if (placeTemporarily)
+
+            for (var i = 0; i < content.Width; i++)
             {
-                for (var i = 0; i < content.Width; i++)
+                for (var j = 0; j < content.Height; j++)
                 {
-                    for (var j = 0; j < content.Height; j++)
+                    if (placeTemporarily)
                     {
                         _temporaryContents.Add(new Vector3Int(pos.x + i, pos.y, pos.z + j), content);
                     }
-                }
-            }
-            else
-            {
-                for (var i = 0; i < content.Width; i++)
-                {
-                    for (var j = 0; j < content.Height; j++)
+                    else
                     {
                         _contents.Add(new Vector3Int(pos.x + i, pos.y, pos.z + j), content);
                     }
                 }
             }
 
-            if (_alteredCells.ContainsKey(pos)) return;
-            _alteredCells.Add(pos,content);
+            if (_alteredCells.ContainsKey(pos))
+            {
+                _alteredCells.Add(pos, content);
+            }
         }
     
         /// <summary>
@@ -185,8 +181,6 @@ namespace Utilities
         /// 2. Set the models properties (parent, name, position)
         /// 3. Add to model dict
         /// </summary>
-        /// <param name="pos"></param>
-        /// <param name="content"></param>
         private void PlaceModel(Vector3Int pos, CellContent content)
         {
             var model = content.GetModel(pos);
@@ -213,11 +207,12 @@ namespace Utilities
         {
             while (true)
             {
-                var replacementArray = (from neighbor in _alteredCells select neighbor).ToArray();
-                if (replacementArray.Length == 0) return;
-                foreach (var item in replacementArray)
+                var alteredArray = (from alteredCell in _alteredCells select alteredCell.Key).ToArray();
+                if (alteredArray.Length == 0) return;
+                foreach (var cell in alteredArray)
                 {
-                    foreach (var neighbor in GridExtension.GetNeighborPositions(item.Key))
+                    var neighbors = GridExtension.GetNeighborPositions(cell);
+                    foreach (var neighbor in neighbors)
                     {
                         if (!_temporaryContents.TryGetValue(neighbor, out var neighborContent) && !_contents.TryGetValue(neighbor, out neighborContent)) continue;
                         if (!neighborContent.NeedsNewModel(neighbor, neighborContent.Type)) continue;
@@ -229,7 +224,7 @@ namespace Utilities
                         _alteredCells.Add(neighbor, neighborContent);
                     }
 
-                    _alteredCells.Remove(item.Key);
+                    _alteredCells.Remove(cell);
                 }
             }
         }

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using Grid;
 using ScriptableObjects;
 using UnityEngine;
@@ -65,6 +67,9 @@ namespace Game
         /// </summary>
         private void Start() 
         {
+            
+            
+            
             _placementHandler.PlaceAll(CellContentType.Vegetation);
             ui.contentSelected += _placementHandler.SetSelectedContent;
             _input.mouseDown += _placementHandler.Place;
