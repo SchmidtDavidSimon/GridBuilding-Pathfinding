@@ -1,2 +1,0 @@
-D:\Ausbildung\Projects\GridBuilding-Pathfinding\Grid\Grid\Debug\Grid.dll
-D:\Ausbildung\Projects\GridBuilding-Pathfinding\Grid\Grid\Debug\Grid.pdb

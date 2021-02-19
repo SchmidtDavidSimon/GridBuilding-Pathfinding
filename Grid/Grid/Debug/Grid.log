@@ -1,6 +1,0 @@
-﻿  pch.cpp
-  Cell.cpp
-D:\Ausbildung\Projects\GridBuilding-Pathfinding\Grid\Grid\Cell.h(12,4): warning C4091: '__declspec(dllexport)': ignored on left of 'Grid::Cell' when no variable is declared
-  dllmain.cpp
-  Generating Code...
-  Grid.vcxproj -> D:\Ausbildung\Projects\GridBuilding-Pathfinding\Grid\Grid\Debug\Grid.dll
