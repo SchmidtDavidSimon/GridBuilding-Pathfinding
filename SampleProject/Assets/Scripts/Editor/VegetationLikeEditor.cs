@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Editor
 {
-    [CustomEditor(typeof(Vegetationlike)), CanEditMultipleObjects]
+    [CustomEditor(typeof(VegetationLike)), CanEditMultipleObjects]
     public class VegetationLikeEditor : CellContentBuildInstructionsEditor
     {
         protected override void AdditionOnEnable()

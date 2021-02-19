@@ -7,11 +7,17 @@ using Utilities;
 
 namespace ScriptableObjects.BuildInstructions
 {
-    [CreateAssetMenu(menuName = "Scriptable Objects/Cell Content/Building Instructions/Streetlike")]
-    public class Streetlike : CellContentBuildInstructions
+    /// <summary>
+    /// Instructions for content that behaves like a street 
+    /// </summary>
+    [CreateAssetMenu(menuName = "Scriptable Objects/Cell Content/Building Instructions/StreetLike")]
+    public class StreetLike : CellContentBuildInstructions
     {
         #region private structs
 
+        /// <summary>
+        /// All models needed for content that behaves like a street
+        /// </summary>
         [Serializable]
         private struct Models
         {
@@ -22,6 +28,9 @@ namespace ScriptableObjects.BuildInstructions
             public GameObject fourWay;
         }
 
+        /// <summary>
+        /// All models weighted needed for content that behaves like a street
+        /// </summary>
         [Serializable]
         private struct WeightedModels
         {
@@ -34,12 +43,18 @@ namespace ScriptableObjects.BuildInstructions
 
         #endregion
 
+        #region fields
+
         [SerializeField] private Models models;
         [SerializeField] private WeightedModels weightedModels;
 
-
+        #endregion
+        
         #region public methods
 
+        /// <summary>
+        /// Selects what model to create depending on how many neighboring streets this position has
+        /// </summary>
         protected override ModelInfo CreateModelInfo(Vector3Int pos, int width, int height)
         {
             var neighbors = GridExtension.GetNeighborTypes(pos);
@@ -66,6 +81,9 @@ namespace ScriptableObjects.BuildInstructions
 
         #region utilities
         
+        /// <summary>
+        /// Returns true if the neighboring streets are either left and right or up and down
+        /// </summary>
         private bool CanCreateStraightStreet(CellContentType[] neighbors)
         {
             return neighbors[0] == CellContentType.Street && neighbors[2] == CellContentType.Street
@@ -76,6 +94,9 @@ namespace ScriptableObjects.BuildInstructions
 
         #region selectors
 
+        /// <summary>
+        /// Selects a rotation for a dead end street based on where the neighbor is
+        /// </summary>
         private ModelInfo DeadEnd(CellContentType[] neighbors)
         {
             if (neighbors[2] == CellContentType.Street)
@@ -120,6 +141,9 @@ namespace ScriptableObjects.BuildInstructions
             };
         }
         
+        /// <summary>
+        /// Selects a rotation for a straight street based on where the neighbors are
+        /// </summary>
         private ModelInfo StraightRoad(CellContentType[] neighbors)
         {
             if (neighbors[0] == CellContentType.Street && neighbors[2] == CellContentType.Street)
@@ -141,6 +165,9 @@ namespace ScriptableObjects.BuildInstructions
             };
         }
         
+        /// <summary>
+        /// Selects a rotation for a straight street based on where the neighbors are
+        /// </summary>
         private ModelInfo Corner(CellContentType[] neighbors)
         {
             if (neighbors[0] == CellContentType.Street && neighbors[1] == CellContentType.Street)
@@ -181,6 +208,9 @@ namespace ScriptableObjects.BuildInstructions
             };
         }
         
+        /// <summary>
+        /// Selects a rotation for a three way street based on where the neighbors are
+        /// </summary>
         private ModelInfo ThreeWay(CellContentType[] neighbors)
         {
             if (neighbors[0] != CellContentType.Street)
@@ -223,6 +253,9 @@ namespace ScriptableObjects.BuildInstructions
             };
         }
         
+        /// <summary>
+        /// Returns a four way model info
+        /// </summary>
         private ModelInfo FourWay() => new ModelInfo
         {
             model = usesWeightedModels

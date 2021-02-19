@@ -6,6 +6,9 @@ using Utilities;
 
 namespace Grid
 {
+    /// <summary>
+    /// Class to handle the integration of the c++ dll
+    /// </summary>
     public class GridExtension 
     {
         private static Grid _typeGrid;

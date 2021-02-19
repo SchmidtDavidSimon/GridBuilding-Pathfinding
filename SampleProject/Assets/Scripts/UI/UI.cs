@@ -6,6 +6,9 @@ using Utilities;
 
 namespace UI
 {
+    /// <summary>
+    /// Handling the Interaction with the User Interface
+    /// </summary>
     public class UI : MonoBehaviour
     {
         #region actions

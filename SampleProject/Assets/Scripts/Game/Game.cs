@@ -6,9 +6,14 @@ using Utilities;
 
 namespace Game
 {
+    /// <summary>
+    /// Handles game-setup and acts as a service singleton.
+    /// </summary>
     [RequireComponent(typeof(Input),typeof(AudioPlayer))]
     public class Game : MonoBehaviour
     {
+        #region fields
+
         public static Game instance;
     
         public AudioPlayer AudioPlayer { get; private set; }
@@ -25,6 +30,17 @@ namespace Game
         private Input _input;
         private PlacementHandler _placementHandler;
 
+        #endregion
+
+        #region private methods
+
+        /// <summary>
+        /// Set static instance
+        /// Setup game mechanics:
+        /// 1. get needed components
+        /// 2. generate a new grid
+        /// 3. create a placement handler
+        /// </summary>
         private void Awake()
         {
             if (instance == null)
@@ -43,26 +59,30 @@ namespace Game
             _placementHandler = new PlacementHandler(modelParent, cellContents);
         }
 
+        /// <summary>
+        /// Place vegetation on all cells to have the starting models
+        /// Connect UI and input actions with the placement handler
+        /// </summary>
         private void Start() 
         {
-            _placementHandler.SetAll(CellContentType.Vegetation);
+            _placementHandler.PlaceAll(CellContentType.Vegetation);
             ui.contentSelected += _placementHandler.SetSelectedContent;
-            _input.mouseHold += _placementHandler.Place;
+            _input.mouseDown += _placementHandler.Place;
             _input.mouseUp += _placementHandler.FinishPlacement;
-            
-             //  _placementHandler.SetSelectedContent(CellContentType.Street);
-             //  _placementHandler.Place(new Vector3Int(8,0,7));
-             //  _placementHandler.Place(new Vector3Int(8,0,8));
-             //  _placementHandler.FinishPlacement();
-             //  _placementHandler.SetSelectedContent(CellContentType.Residence1);
-             //  _placementHandler.Place(new Vector3Int(8,0,8));
-             //  _placementHandler.Place(new Vector3Int(9,0,8));
-             //  _placementHandler.FinishPlacement();
         }
 
+        #endregion
+
+        #region public methods
+
+        /// <summary>
+        /// Destroys a given GameObject
+        /// </summary>
         public void DestroyGo(GameObject gO)
         {
             Destroy(gO);
         }
+
+        #endregion
     }
 }

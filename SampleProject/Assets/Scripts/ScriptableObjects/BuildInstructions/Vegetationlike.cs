@@ -4,8 +4,11 @@ using Utilities;
 
 namespace ScriptableObjects.BuildInstructions
 {
-    [CreateAssetMenu(menuName = "Scriptable Objects/Cell Content/Building Instructions/Vegetationlike")]
-    public class Vegetationlike : CellContentBuildInstructions
+    /// <summary>
+    /// Instructions for content that behaves like vegetation 
+    /// </summary>
+    [CreateAssetMenu(menuName = "Scriptable Objects/Cell Content/Building Instructions/VegetationLike")]
+    public class VegetationLike : CellContentBuildInstructions
     {
         [SerializeField] private List<GameObject> models;
         [SerializeField] private List<WeightedModel> weightedModels;
@@ -13,6 +16,9 @@ namespace ScriptableObjects.BuildInstructions
         
         #region public methods
 
+        /// <summary>
+        /// Selects either a random or a weighted model and creates a random rotation around the y axe
+        /// </summary>
         protected override ModelInfo CreateModelInfo(Vector3Int pos, int width, int height)
         {
             return new ModelInfo

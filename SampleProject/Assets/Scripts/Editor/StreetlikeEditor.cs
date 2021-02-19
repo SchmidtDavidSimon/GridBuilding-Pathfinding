@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Editor
 {
-    [CustomEditor(typeof(Streetlike)), CanEditMultipleObjects]
+    [CustomEditor(typeof(StreetLike)), CanEditMultipleObjects]
     public class StreetlikeEditor : CellContentBuildInstructionsEditor
     {
         protected override void AdditionOnEnable()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Editor
 {
-    [CustomEditor(typeof(Residencelike)), CanEditMultipleObjects]
+    [CustomEditor(typeof(ResidenceLike)), CanEditMultipleObjects]
     public class ResidencelikeEditor : CellContentBuildInstructionsEditor
     {
         protected override void AdditionOnEnable()

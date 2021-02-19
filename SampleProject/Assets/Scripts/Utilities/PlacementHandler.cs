@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Utilities
 { 
+    /// <summary>
+    /// Handles The correct placement of cells including the data and the model.
+    /// </summary>
     public class PlacementHandler
     {
         #region fields
@@ -53,7 +56,7 @@ namespace Utilities
         /// Set all cells to of the grid to the given type.
         /// </summary>
         /// <param name="type">The given type</param>
-        public void SetAll(CellContentType type)
+        public void PlaceAll(CellContentType type)
         {
             var content = _contentTemplates[type];
             if (content.HasSpecialBuildInstructions)
