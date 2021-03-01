@@ -18,11 +18,12 @@ public:
 
 	int GetAdjacentValidCoordinatesCount(Coordinate coordinate);
 	std::vector<Coordinate> GetAdjacentVaildCoordinates(Coordinate coordinate);
-	std::vector<Coordinate> GetAdjacentValidCoordinatesWithValue(Coordinate coordinate, std::vector<int> value);
+	std::vector<Coordinate> GetAdjacentValidCoordinatesWithValues(Coordinate coordinate, std::vector<int> value);
 	std::vector<int> GetAdjacentValidValues(Coordinate coordinate);
+	std::vector<int> GetAdjacentValues(Coordinate coordinate);
 
 	std::vector<Coordinate> AStarSearch(Coordinate start, Coordinate end, bool useCost);
-	std::vector<Coordinate> AStarSearch(Coordinate start, Coordinate end, bool useCost, AStarTypeInfo typeInfo);
+	std::vector<Coordinate> AStarSearch(Coordinate start, Coordinate end, bool useCost, AStarValueInfo typeInfo);
 	
 	int Width, Height, DefaultValue, OutOfBoundsValue;
 

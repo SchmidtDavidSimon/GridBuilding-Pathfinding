@@ -104,7 +104,7 @@ std::vector<Coordinate> Grid::GetAdjacentVaildCoordinates(Coordinate coordinate)
 	return retVal;
 }
 
-std::vector<Coordinate> Grid::GetAdjacentValidCoordinatesWithValue(Coordinate coordinate, std::vector<int> value)
+std::vector<Coordinate> Grid::GetAdjacentValidCoordinatesWithValues(Coordinate coordinate, std::vector<int> value)
 {
 	std::vector<Coordinate> retVal;
 	if (coordinate.X > 0)
@@ -172,6 +172,36 @@ std::vector<int> Grid::GetAdjacentValidValues(Coordinate coordinate)
 	return retVal;
 }
 
+std::vector<int> Grid::GetAdjacentValues(Coordinate coordinate)
+{
+	std::vector<int> retVal;
+	for (int i = 0; i < 4; i++)
+	{
+		retVal.push_back(OutOfBoundsValue);
+	}
+	if (coordinate.X > 0)
+	{
+		int gridIdx = CoordinateToGridIdx({ coordinate.X + 1, coordinate.Y });
+		retVal[0] = m_Grid[gridIdx];
+	}
+	if (coordinate.X < Width - 1)
+	{
+		int gridIdx = CoordinateToGridIdx({ coordinate.X - 1, coordinate.Y });
+		retVal[2] = m_Grid[gridIdx];
+	}
+	if (coordinate.Y > 0)
+	{
+		int gridIdx = CoordinateToGridIdx({ coordinate.X, coordinate.Y - 1 });
+		retVal[3] = m_Grid[gridIdx];
+	}
+	if (coordinate.Y < Height - 1)
+	{
+		int gridIdx = CoordinateToGridIdx({ coordinate.X, coordinate.Y + 1 });
+		retVal[1] = m_Grid[gridIdx];
+	}
+	return retVal;
+}
+
 std::vector<Coordinate> Grid::AStarSearch(Coordinate start, Coordinate end, bool useCost)
 {
 	std::vector<Coordinate> path;
@@ -218,7 +248,7 @@ std::vector<Coordinate> Grid::AStarSearch(Coordinate start, Coordinate end, bool
 	return path;
 }
 
-std::vector<Coordinate> Grid::AStarSearch(Coordinate start, Coordinate end, bool useCost, AStarTypeInfo typeInfo)
+std::vector<Coordinate> Grid::AStarSearch(Coordinate start, Coordinate end, bool useCost, AStarValueInfo typeInfo)
 {
 	std::vector<Coordinate> path;
 
@@ -232,7 +262,7 @@ std::vector<Coordinate> Grid::AStarSearch(Coordinate start, Coordinate end, bool
 	priorityMap[start] = 0;
 	parentsMap[start] = { OutOfBoundsValue,OutOfBoundsValue };
 
-	if (std::find(typeInfo.UseableTypes.begin(), typeInfo.UseableTypes.end(), typeInfo.TypeGrid[CoordinateToGridIdx(start)]) != typeInfo.UseableTypes.end()) return path;
+	if (std::find(typeInfo.UseableValues.begin(), typeInfo.UseableValues.end(), typeInfo.ValueGrid->m_Grid[CoordinateToGridIdx(start)]) != typeInfo.UseableValues.end()) return path;
 
 	while (coordsToCheck.size() > 0)
 	{
@@ -246,7 +276,7 @@ std::vector<Coordinate> Grid::AStarSearch(Coordinate start, Coordinate end, bool
 			return path;
 		}
 
-		auto neighbors = typeInfo.TypeGrid->GetAdjacentValidCoordinatesWithValue(current, typeInfo.UseableTypes);
+		auto neighbors = typeInfo.ValueGrid->GetAdjacentValidCoordinatesWithValues(current, typeInfo.UseableValues);
 		for (auto neighbor : neighbors)
 		{
 			auto newCost = useCost

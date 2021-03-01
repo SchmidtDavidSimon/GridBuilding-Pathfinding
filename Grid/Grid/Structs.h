@@ -8,14 +8,13 @@ struct Coordinate
 
 	bool operator==(Coordinate cOther);
 	bool operator!=(Coordinate cOther);
+	bool operator<(const Coordinate& cOther) const;
 };
-
 
 class Grid;
 
-struct AStarTypeInfo
+struct AStarValueInfo
 {
-public:
-	std::vector<int> UseableTypes;
-	Grid* TypeGrid;
+	std::vector<int> UseableValues;
+	Grid* ValueGrid;
 };
