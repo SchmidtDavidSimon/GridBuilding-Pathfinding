@@ -11,7 +11,8 @@ int* Extern::CreateGrid(int width, int height, int defaultValue, int outOfBounds
 
 void Extern::DeleteGrid(int* grid)
 {
-	delete grid;
+	Grid* g = (Grid*)grid;
+	delete g;
 }
 
 int Extern::GetWidth(int* grid)

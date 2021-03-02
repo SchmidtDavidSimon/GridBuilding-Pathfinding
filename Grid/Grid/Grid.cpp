@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "Grid.h"
 
-
 Grid::Grid(int width, int height, int defaultValue, int outOfBoundsValue)
 	:Width(width)
 	,Height(height)
@@ -10,7 +9,7 @@ Grid::Grid(int width, int height, int defaultValue, int outOfBoundsValue)
 {
 	for (int i = 0; i < width*height; i++)
 	{
-		m_Grid[i] = defaultValue;
+		m_Grid.push_back(defaultValue);
 	}
 }
 

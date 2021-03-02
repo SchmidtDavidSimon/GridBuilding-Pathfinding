@@ -26,16 +26,6 @@ namespace Utilities
 
         #endregion
 
-        #region enums
-        
-        private enum Delete
-        {
-            Permanent,
-            Temporary,
-        }
-
-        #endregion
-        
         #region public methods
 
         /// <summary>
@@ -116,7 +106,6 @@ namespace Utilities
             _startPos = null;
             _endPos = null;
             PermanentizeTemporaryContents();
-            Game.Game.instance.AudioPlayer.PlayPlacementSound();
         }
 
         #endregion
@@ -216,9 +205,7 @@ namespace Utilities
                     {
                         if (!_temporaryContents.TryGetValue(neighbor, out var neighborContent) && !_contents.TryGetValue(neighbor, out neighborContent)) continue;
                         if (!neighborContent.NeedsNewModel(neighbor, neighborContent.Type)) continue;
-                        DeleteContent(neighbor, _contents.ContainsKey(neighbor) 
-                            ? Delete.Permanent
-                            : Delete.Temporary);
+                        DeleteContent(neighbor, _contents.ContainsKey(neighbor));
                         PlaceContent(neighbor, neighborContent, !_contents.ContainsKey(neighbor));
                         if (_alteredCells.ContainsKey(neighbor)) continue;
                         _alteredCells.Add(neighbor, neighborContent);
@@ -242,7 +229,7 @@ namespace Utilities
                 {
                     for (var j = 0; j < item.Value.Height; j++)
                     {
-                        DeleteContent(new Vector3Int(item.Key.x + i, item.Key.y, item.Key.z +j), Delete.Temporary);
+                        DeleteContent(new Vector3Int(item.Key.x + i, item.Key.y, item.Key.z +j), false);
                     }
                 }
             }
@@ -260,23 +247,23 @@ namespace Utilities
         /// </summary>
         /// <param name="pos">position to delete content of</param>
         /// <param name="contentsToDelete"></param>
-        private void DeleteContent(Vector3Int pos, Delete contentsToDelete)
+        private void DeleteContent(Vector3Int pos, bool deletePermanent)
         {
             if (!GridExtension.EmptyCell(pos))
             {
                 Debug.LogError($"Trying to clear a cell that is outside of the grid");
                 return;
             }
-            if (!CellIsSaved(pos, contentsToDelete)) return;
+            if (!CellIsSaved(pos, deletePermanent)) return;
         
-            AddToAlteredCells(pos, contentsToDelete);
+            AddToAlteredCells(pos, deletePermanent);
             Game.Game.instance.DestroyGo(_models[pos]);
             _models.Remove(pos);
-            if (contentsToDelete == Delete.Permanent && !_permanentPathContent.ContainsKey(pos) &&_contents[pos].Type == _selectedContent)
+            if (deletePermanent && !_permanentPathContent.ContainsKey(pos) &&_contents[pos].Type == _selectedContent)
             {
                 _permanentPathContent.Add(pos,_contents[pos]);
             }
-            RemoveFromDict(pos, contentsToDelete);
+            RemoveFromDict(pos, deletePermanent);
         }
     
         /// <summary>
@@ -295,7 +282,7 @@ namespace Utilities
                 {
                     for (var j = 0; j < content.Height; j++)
                     {
-                        DeleteContent(new Vector3Int(pos.x + i, pos.y, pos.z + j), Delete.Permanent);
+                        DeleteContent(new Vector3Int(pos.x + i, pos.y, pos.z + j), true);
                     }
                 }
             }
@@ -305,77 +292,45 @@ namespace Utilities
 
         #region utilities
         
-        private bool CellIsSaved(Vector3Int pos, Delete contentsToDelete)
+        private bool CellIsSaved(Vector3Int pos, bool deletePermanent)
         {
-            while (true)
+            if (deletePermanent)
             {
-                switch (contentsToDelete)
-                {
-                    case Delete.Permanent:
-                        if (!_contents.ContainsKey(pos))
-                        {
-                            Debug.LogError("Trying to remove content that doesn't exists in perm");
-                            return false;
-                        }
-                        break;
-                    case Delete.Temporary:
-                        if (!_temporaryContents.ContainsKey(pos))
-                        {
-                            Debug.LogError("Trying to remove content that doesn't exists in temp");
-                            return false;
-                        }
-                        break;
-                    default:
-                        contentsToDelete = _contents.ContainsKey(pos) ? Delete.Permanent : Delete.Temporary;
-                        continue;
-                }
-                break;
+                if (_contents.ContainsKey(pos)) return true;
+                Debug.LogError("Trying to remove content that doesn't exists in perm");
+                return false;
             }
-            return true;
+
+            if (_temporaryContents.ContainsKey(pos)) return true;
+            Debug.LogError("Trying to remove content that doesn't exists in temp");
+            return false;
         }
         
-        private void AddToAlteredCells(Vector3Int pos, Delete contentsToDelete)
+        private void AddToAlteredCells(Vector3Int pos, bool deletePermanent)
         {
-            while (true)
+            if (deletePermanent)
             {
-                switch (contentsToDelete)
-                {
-                    case Delete.Permanent:
-                        _contents.TryGetValue(pos, out var content);
-                        if (_alteredCells.ContainsKey(pos)) break;
-                        _alteredCells.Add(pos, content);
-                        break;
-                    case Delete.Temporary:
-                        _temporaryContents.TryGetValue(pos, out content);
-                        if (_alteredCells.ContainsKey(pos)) break;
-                        _alteredCells.Add(pos, content);
-                        break;
-                    default:
-                        contentsToDelete = _contents.ContainsKey(pos) ? Delete.Permanent : Delete.Temporary;
-                        continue;
-                }
-                break;
+                _contents.TryGetValue(pos, out var content);
+                if (_alteredCells.ContainsKey(pos)) return;
+                _alteredCells.Add(pos, content);
+            }
+            else
+            {
+                _temporaryContents.TryGetValue(pos, out var content);
+                if (_alteredCells.ContainsKey(pos)) return;
+                _alteredCells.Add(pos, content);
             }
         }
 
-        private void RemoveFromDict(Vector3Int pos, Delete contentsToDelete)
+        private void RemoveFromDict(Vector3Int pos, bool deletePermanent)
         {
-            while (true)
+            if (deletePermanent)
             {
-                switch (contentsToDelete)
-                {
-                    case Delete.Permanent:
-                        _contents.Remove(pos);
-                        break;
-                    case Delete.Temporary:
-                        _temporaryContents.Remove(pos);
-                        break;
-                    default:
-                        contentsToDelete = _contents.ContainsKey(pos) ? Delete.Permanent : Delete.Temporary;
-                        continue;
-                }
-
-                break;
+                _contents.Remove(pos);
+            }
+            else
+            {
+                _temporaryContents.Remove(pos);
             }
         }
 

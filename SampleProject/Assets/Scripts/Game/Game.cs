@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
@@ -31,6 +32,7 @@ namespace Game
     
         private Input _input;
         private PlacementHandler _placementHandler;
+        private GridExtension1 _gE;
 
         #endregion
 
@@ -58,6 +60,7 @@ namespace Game
             _input = GetComponent<Input>();
             
             new GridExtension(width, height);
+            //_gE = new GridExtension1(width, height);
             _placementHandler = new PlacementHandler(modelParent, cellContents);
         }
 
@@ -67,15 +70,17 @@ namespace Game
         /// </summary>
         private void Start() 
         {
-            
-            
-            
-            _placementHandler.PlaceAll(CellContentType.Vegetation);
-            ui.contentSelected += _placementHandler.SetSelectedContent;
-            _input.mouseDown += _placementHandler.Place;
-            _input.mouseUp += _placementHandler.FinishPlacement;
+             _placementHandler.PlaceAll(CellContentType.Vegetation);
+             ui.contentSelected += _placementHandler.SetSelectedContent;
+             _input.mouseDown += _placementHandler.Place;
+             _input.mouseUp += _placementHandler.FinishPlacement;
+            _input.mouseUp += AudioPlayer.PlayPlacementSound;
         }
 
+        private void OnDestroy()
+        {
+            //_gE.Shutdown();
+        }
         #endregion
 
         #region public methods
