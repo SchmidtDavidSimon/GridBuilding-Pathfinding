@@ -158,7 +158,7 @@ namespace Utilities
                 }
             }
 
-            if (_alteredCells.ContainsKey(pos))
+            if (!_alteredCells.ContainsKey(pos))
             {
                 _alteredCells.Add(pos, content);
             }
