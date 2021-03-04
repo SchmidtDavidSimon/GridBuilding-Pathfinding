@@ -21,7 +21,7 @@ Grid::Grid(const Grid &g)
 {
 	for (int i = 0; i < g.Width* g.Height; i++)
 	{
-		m_Grid[i] = g.DefaultValue;
+		m_Grid.push_back(g.DefaultValue);
 	}
 }
 
@@ -180,12 +180,12 @@ std::vector<int> Grid::GetAdjacentValues(Coordinate coordinate)
 	}
 	if (coordinate.X > 0)
 	{
-		int gridIdx = CoordinateToGridIdx({ coordinate.X + 1, coordinate.Y });
+		int gridIdx = CoordinateToGridIdx({ coordinate.X - 1, coordinate.Y });
 		retVal[0] = m_Grid[gridIdx];
 	}
 	if (coordinate.X < Width - 1)
 	{
-		int gridIdx = CoordinateToGridIdx({ coordinate.X - 1, coordinate.Y });
+		int gridIdx = CoordinateToGridIdx({ coordinate.X + 1, coordinate.Y });
 		retVal[2] = m_Grid[gridIdx];
 	}
 	if (coordinate.Y > 0)
@@ -218,7 +218,15 @@ std::vector<Coordinate> Grid::AStarSearch(Coordinate start, Coordinate end, bool
 	while (coordsToCheck.size() > 0)
 	{
 		auto current = GetClosestCoordinate(coordsToCheck, priorityMap);
-		auto it = GetCurrentIterator(coordsToCheck, current);
+		auto it = coordsToCheck.begin();
+		for (auto& coord : coordsToCheck)
+		{
+			if (coord == current)
+			{
+				break;
+			}
+			it++;
+		}
 		coordsToCheck.erase(it);
 		
 		if (current == end)
@@ -261,12 +269,23 @@ std::vector<Coordinate> Grid::AStarSearch(Coordinate start, Coordinate end, bool
 	priorityMap[start] = 0;
 	parentsMap[start] = { OutOfBoundsValue,OutOfBoundsValue };
 
-	if (std::find(typeInfo.UseableValues.begin(), typeInfo.UseableValues.end(), typeInfo.ValueGrid->m_Grid[CoordinateToGridIdx(start)]) != typeInfo.UseableValues.end()) return path;
+	if (std::find(typeInfo.UseableValues.begin(), 
+				  typeInfo.UseableValues.end(), 
+		          typeInfo.ValueGrid->m_Grid[CoordinateToGridIdx(start)]) 
+		== typeInfo.UseableValues.end()) return path;
 
 	while (coordsToCheck.size() > 0)
 	{
 		auto current = GetClosestCoordinate(coordsToCheck, priorityMap);
-		auto it = GetCurrentIterator(coordsToCheck, current);
+		auto it = coordsToCheck.begin();
+		for (auto& coord : coordsToCheck)
+		{
+			if (coord == current)
+			{
+				break;
+			}
+			it++;
+		}
 		coordsToCheck.erase(it);
 
 		if (current == end)
@@ -317,21 +336,6 @@ Coordinate Grid::GetClosestCoordinate(std::vector<Coordinate> coordsToChek, std:
 		}
 	}
 	return candidate;
-}
-
-std::vector<Coordinate>::iterator Grid::GetCurrentIterator(std::vector<Coordinate> vector, Coordinate current)
-{
-	auto retVal = vector.begin();
-
-	for (auto& coord : vector)
-	{
-		if (coord == current)
-		{
-			return retVal;
-		}
-		retVal++;
-	}
-	return vector.begin();
 }
 
 std::vector<Coordinate> Grid::GeneratePath(std::map<Coordinate, Coordinate> parentsMap, Coordinate end)

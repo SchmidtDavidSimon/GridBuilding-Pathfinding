@@ -1,27 +1,38 @@
 #pragma once
 #include "Grid.h"
 
+#ifdef _EXPORTING
+#define dllFunc __declspec(dllexport)
+#else
+#define dllFunc __declspec(dllimport)
+#endif // _EXPORTING
+
+
+
 namespace Extern
 {
 	extern "C"
 	{
-		__declspec(dllexport) int* CreateGrid(int width, int height, int defaultValue = -1, int outOfBoundsValue = INT_MIN);
-		__declspec(dllexport) void DeleteGrid(int* grid);
+		dllFunc int* CreateGrid(int width, int height, int defaultValue = -1, int outOfBoundsValue = INT_MIN);
+		dllFunc void DeleteGrid(int* grid);
 
-		__declspec(dllexport) int GetWidth(int* grid);
-		__declspec(dllexport) int GetHeight(int* grid);
-		__declspec(dllexport) int GetDefaultValue(int* grid);
-		__declspec(dllexport) int GetOutOfBoundsValue(int* grid);
+		dllFunc int GetWidth(int* grid);
+		dllFunc int GetHeight(int* grid);
+		dllFunc int GetDefaultValue(int* grid);
+		dllFunc int GetOutOfBoundsValue(int* grid);
 		
-		__declspec(dllexport) int GetCoordinateContent(int* grid, int x, int y);
-		__declspec(dllexport) void SetCoordinateContent(int* grid, int x, int y, int value);
-		__declspec(dllexport) int* GetAjacentValues(int* grid, int x, int y);
-		__declspec(dllexport) int* GetAjacentValidCoordinates(int* grid, int x, int y);
-		__declspec(dllexport) int* GetAjacentValidValuesOfTypes(int* grid, int x, int y, int* values);
+		dllFunc int GetCoordinateContent(int* grid, int x, int y);
+		dllFunc void SetCoordinateContent(int* grid, int x, int y, int value);
 		
-		__declspec(dllexport) int* AStarSearch(int* grid, int startX, int startY, int endX, int endY, bool useCost);
-		__declspec(dllexport) int* AStarSearchWithTypeInfo(int* grid, int startX, int startY, int endX, int endY, bool useCost, int* useableValues, int* valueGrid);
+		dllFunc int* GetRandomCoordinateOfValue(int* grid, int value);
+
+		dllFunc int* GetAdjacentValues(int* grid, int x, int y);
+		dllFunc int* GetAdjacentValidCoordinates(int* grid, int x, int y);
+		dllFunc int* GetAdjacentValidValuesOfTypes(int* grid, int x, int y, int* values);
+		
+		dllFunc int* AStarSearch(int* grid, int startX, int startY, int endX, int endY, bool useCost);
+		dllFunc int* AStarSearchWithTypeInfo(int* grid, int startX, int startY, int endX, int endY, bool useCost, int* usebleValues, int* valueGrid);
 	
-		__declspec(dllexport) void DeleteArray(int* arr);
+		dllFunc void DeleteArray(int* arr);
 	}
 }

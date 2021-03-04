@@ -14,7 +14,7 @@ public:
 	void SetGridContent(Coordinate cooridnate, int value);
 
 	bool IsPositionSet(Coordinate cooridnate);
-	Coordinate GetRandomCooridanteOfValue(int type);
+	Coordinate GetRandomCooridanteOfValue(int value);
 
 	int GetAdjacentValidCoordinatesCount(Coordinate coordinate);
 	std::vector<Coordinate> GetAdjacentVaildCoordinates(Coordinate coordinate);
@@ -25,16 +25,19 @@ public:
 	std::vector<Coordinate> AStarSearch(Coordinate start, Coordinate end, bool useCost);
 	std::vector<Coordinate> AStarSearch(Coordinate start, Coordinate end, bool useCost, AStarValueInfo typeInfo);
 	
-	int Width, Height, DefaultValue, OutOfBoundsValue;
+	int Width;
+	int Height;
+	int DefaultValue;
+	int OutOfBoundsValue;
 
 private:
 	int CoordinateToGridIdx(Coordinate cell);
 	Coordinate GridIdxToCoordinate(int pos);
 	
 	Coordinate GetClosestCoordinate(std::vector<Coordinate> coordsToChek, std::map<Coordinate, float> distanceMap);
-	std::vector<Coordinate>::iterator GetCurrentIterator(std::vector<Coordinate> vector, Coordinate current);
 	std::vector<Coordinate> GeneratePath(std::map<Coordinate, Coordinate> parentsMap, Coordinate end);
 	float ManhattanDistance(Coordinate current, Coordinate end);
+	
 	std::vector<int> m_Grid;
 };
 

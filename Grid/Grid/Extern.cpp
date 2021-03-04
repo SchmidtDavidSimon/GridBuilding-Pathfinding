@@ -5,7 +5,7 @@
 int* Extern::CreateGrid(int width, int height, int defaultValue, int outOfBoundsValue)
 {
 	auto grid = new Grid(width, height, defaultValue, outOfBoundsValue);
-	int* retVal = (int*) &grid;
+	int* retVal = (int*) grid;
 	return retVal;
 }
 
@@ -53,7 +53,19 @@ void Extern::SetCoordinateContent(int* grid, int x, int y, int value)
 	g->SetGridContent(coord, value);
 }
 
-int* Extern::GetAjacentValues(int* grid, int x, int y)
+int* Extern::GetRandomCoordinateOfValue(int* grid, int value)
+{
+	Grid* g = (Grid*)grid;
+	
+	int* retVal = new int[2];
+	auto coord = g->GetRandomCooridanteOfValue(value);
+	retVal[0] = coord.X;
+	retVal[1] = coord.Y;
+	
+	return retVal;
+}
+
+int* Extern::GetAdjacentValues(int* grid, int x, int y)
 {
 	Coordinate coord{ x,y };
 	Grid* g = (Grid*)grid;
@@ -68,7 +80,7 @@ int* Extern::GetAjacentValues(int* grid, int x, int y)
 	return retVal;
 }
 
-int* Extern::GetAjacentValidCoordinates(int* grid, int x, int y)
+int* Extern::GetAdjacentValidCoordinates(int* grid, int x, int y)
 {
 	Coordinate coord{ x,y };
 	Grid* g = (Grid*)grid;
@@ -85,14 +97,14 @@ int* Extern::GetAjacentValidCoordinates(int* grid, int x, int y)
 	return retVal;
 }
 
-int* Extern::GetAjacentValidValuesOfTypes(int* grid, int x, int y, int* values)
+int* Extern::GetAdjacentValidValuesOfTypes(int* grid, int x, int y, int* values)
 {
 	Coordinate coord{ x,y };
 	Grid* g = (Grid*)grid;
 	
 	auto size = values[0];
 	std::vector<int> valueVec;
-	for (auto i = 1; i < size; i++)
+	for (auto i = 1; i < size + 1; i++)
 	{
 		valueVec.push_back(values[i]);
 	}
@@ -105,7 +117,6 @@ int* Extern::GetAjacentValidValuesOfTypes(int* grid, int x, int y, int* values)
 	{
 		retVal[i * 2 + 1] = vec[i].X;
 		retVal[i * 2 + 2] = vec[i].Y;
-	
 	}
 	return retVal;
 }
@@ -128,20 +139,20 @@ int* Extern::AStarSearch(int* grid, int startX, int startY, int endX, int endY, 
 	return retVal;
 }
 
-int* Extern::AStarSearchWithTypeInfo(int* grid, int startX, int startY, int endX, int endY, bool useCost, int* useableValues, int* valueGrid)
+int* Extern::AStarSearchWithTypeInfo(int* grid, int startX, int startY, int endX, int endY, bool useCost, int* usableValues, int* valueGrid)
 {
 	Coordinate start{ startX,startY };
 	Coordinate end{ endX,endY };
 	Grid* g = (Grid*)grid;
 	Grid* vG = (Grid*)valueGrid;
 	
-	auto size = useableValues[0];
+	auto size = usableValues[0];
 	std::vector<int> valueVec;
-	for (auto i = 1; i < size; i++)
+	for (auto i = 1; i < size + 1; i++)
 	{
-		valueVec.push_back(useableValues[i]);
+		valueVec.push_back(usableValues[i]);
 	}
-	AStarValueInfo info { valueVec,vG};
+	AStarValueInfo info {valueVec,vG};
 	
 	auto vec = g->AStarSearch(start, end, useCost, info);
 	

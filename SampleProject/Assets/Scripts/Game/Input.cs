@@ -10,7 +10,7 @@ namespace Game
     public class Input : MonoBehaviour
     {
         #region actions
-
+        
         public Action<Vector3Int> mouseDown;
         public Action mouseUp;
 
@@ -32,6 +32,7 @@ namespace Game
         {
             CheckClickUp();
             CheckClickDown();
+            CheckESC();
         }
 
         /// <summary>
@@ -55,6 +56,16 @@ namespace Game
         private void CheckClickUp()
         {
             if (!UnityEngine.Input.GetMouseButtonUp(0) || EventSystem.current.IsPointerOverGameObject()) return;
+            mouseUp?.Invoke();
+        }
+        
+        /// <summary>
+        /// Checks for esc key to unselect the placement
+        /// TODO: Rough version, make more concrete
+        /// </summary>
+        private void CheckESC()
+        {
+            if (!UnityEngine.Input.GetKeyDown(KeyCode.Escape)) return;
             mouseUp?.Invoke();
         }
         
