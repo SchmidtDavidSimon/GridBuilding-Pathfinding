@@ -71,6 +71,11 @@ namespace Utilities
 
         #region public methods
 
+        /// <summary>
+        /// Creates 3 grids handled by dll. One fpr storing cell-type information, one for storing cell-movement-cost information and one for storing cell-appeal information.
+        /// </summary>
+        /// <param name="width">Width of the created grids</param>
+        /// <param name="height">Height of the created grids</param>
         public GridExtension(int width, int height)
         {
             _typeGrid = CreateGrid(width, height, TypeDefault);
@@ -82,8 +87,17 @@ namespace Utilities
         
         public static int GridHeight => GetHeight(_typeGrid);
 
+        /// <summary>
+        /// Returns the value of the type grid on the given cell.
+        /// </summary>
         public static CellContentType GetCell(Vector3Int cell) => (CellContentType) GetCoordinateContent(_typeGrid, cell.x, cell.y);
 
+        /// <summary>
+        /// Sets the values of each of the grids to the respective value of the content on the given cell.
+        /// 1. ContentType on the typeGrid
+        /// 2. MovementCost on the costGrid
+        /// 3. ContentAppeal on the appealGrid
+        /// </summary>
         public static bool SetCell(Vector3Int cell, CellContent content)
         {
             var retVal = SetCell(_typeGrid, cell.x, cell.z, content.Width, content.Height, (int) content.Type);
@@ -107,26 +121,52 @@ namespace Utilities
             return retVal;
         }
 
+        /// <summary>
+        /// Sets all grids to their respective default value on the given cell
+        /// </summary>
         public static bool EmptyCell(Vector3Int cell) => SetCell(_costGrid, cell.x, cell.z, 1, 1, CostDefault) 
                                                          && SetCell(_appealGrid, cell.x, cell.z, 1, 1, AppealDefault)
                                                          && SetCell(_typeGrid, cell.x, cell.z, 1, 1, TypeDefault);
         
 
+        /// <summary>
+        /// Checks if the given cell is in bounds of the grid.
+        /// Using the type grid as all grids will always have the same width and height
+        /// </summary>
         public static bool CellIsInBound(Vector3Int cell) => cell.x >= 0 
                                                              && cell.x < GetWidth(_typeGrid) 
-                                                             && cell.z >= 0 && cell.z < GetHeight(_typeGrid);
+                                                             && cell.z >= 0
+                                                             && cell.z < GetHeight(_typeGrid);
 
+        /// <summary>
+        /// Checks if the value of the typeGrid on the given cell is equal to the given type 
+        /// </summary>
         public static bool CellIsOfType(Vector3Int cell, CellContentType type) => type == GetCell(cell);
 
-        public static bool CellIsFree(Vector3Int cell) =>
-            GetCoordinateContent(_typeGrid, cell.x, cell.z) == TypeDefault;
+        /// <summary>
+        /// Checks if the value of the typeGrid on the given cell is equal to the TypeDefault 
+        /// </summary>
+        public static bool CellIsFree(Vector3Int cell) => GetCoordinateContent(_typeGrid, cell.x, cell.z) == TypeDefault;
 
+        /// <summary>
+        /// Returns an array of the given cells neighbor types
+        /// The Array is build up like so: {LEFT-neighbor, TOP-neighbor, RIGHT-neighbor, BOTTOM-neighbor}
+        /// 1. Get the needed info from the grid as a pointer
+        /// 2. Create an array to store the info
+        /// 3. Copy the info from the pointer to the array
+        /// 4. Create the return value array. Assume that all neighbors are out of bounds.
+        /// 5. Check for each neighbor:
+        ///     1. If the info matches the typeGrids out of bounds value. If so skip to the next neighbor
+        ///     2. If the info matches the typeDefault. If so set the return value of that neighbor zo 'None' and skip to the next neighbor
+        ///     3. Cast the info of the neighbor the corresponding ContentType
+        /// 6. Delete the info-pointer
+        /// </summary>
         public static CellContentType[] GetNeighborTypes(Vector3Int cell)
         {
             var neighborsPtr = GetAdjacentValues(_typeGrid, cell.x, cell.z);
             var neighborsArr = new int[4];
             Marshal.Copy(neighborsPtr, neighborsArr, 0, 4);
-            var neighborTypes = new[]
+            var retVal = new[]
             {
                 CellContentType.OutOfBounds,
                 CellContentType.OutOfBounds,
@@ -139,15 +179,15 @@ namespace Utilities
                 if (neighborsArr[i] == GetOutOfBoundsValue(_typeGrid)) continue;
                 if (neighborsArr[i] == TypeDefault)
                 {
-                    neighborTypes[i] = CellContentType.None;
+                    retVal[i] = CellContentType.None;
                     continue;
                 }
 
-                neighborTypes[i] = (CellContentType) neighborsArr[i];
+                retVal[i] = (CellContentType) neighborsArr[i];
             }
             
             DeleteArray(neighborsPtr);
-            return neighborTypes;
+            return retVal;
         }
 
         public static List<Vector3Int> GetNeighborsOfTypes(Vector3Int cell, [CanBeNull] List<CellContentType> types)
@@ -197,6 +237,9 @@ namespace Utilities
             return retVal;
         }
 
+        /// <summary>
+        /// Delete all created grids
+        /// </summary>
         public void Shutdown()
         {
             DeleteGrid(_typeGrid);

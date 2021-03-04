@@ -75,19 +75,19 @@ namespace Game
              _input.mouseDown += _placementHandler.Place;
              _input.mouseUp += _placementHandler.FinishPlacement;
              
-             _placementHandler.SetSelectedContent(CellContentType.Residence1);
-             _placementHandler.Place(Vector3Int.zero);
-             _placementHandler.Place(new Vector3Int(0,0,10));
-             _placementHandler.FinishPlacement();
-             
-             // _placementHandler.SetSelectedContent(CellContentType.Street);
-             // _placementHandler.Place(Vector3Int.zero);
-             // _placementHandler.Place(new Vector3Int(10,0,0));
-             // _placementHandler.FinishPlacement();
              // _placementHandler.SetSelectedContent(CellContentType.Residence1);
-             // _placementHandler.Place(Vector3Int.forward);
-             // _placementHandler.Place(new Vector3Int(10,0,1));
+             // _placementHandler.Place(Vector3Int.zero);
+             // _placementHandler.Place(new Vector3Int(0,0,10));
              // _placementHandler.FinishPlacement();
+             
+              _placementHandler.SetSelectedContent(CellContentType.Street);
+              _placementHandler.Place(Vector3Int.zero);
+              _placementHandler.Place(new Vector3Int(10,0,0));
+              _placementHandler.FinishPlacement();
+              _placementHandler.SetSelectedContent(CellContentType.Residence1);
+              _placementHandler.Place(Vector3Int.forward);
+              _placementHandler.Place(new Vector3Int(10,0,1));
+              _placementHandler.FinishPlacement();
         }
 
         private void SetAudio(CellContentType? contentType)
