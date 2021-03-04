@@ -32,7 +32,7 @@ namespace Game
         {
             CheckClickUp();
             CheckClickDown();
-            CheckESC();
+            CheckEsc();
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Game
         /// Checks for esc key to unselect the placement
         /// TODO: Rough version, make more concrete
         /// </summary>
-        private void CheckESC()
+        private void CheckEsc()
         {
             if (!UnityEngine.Input.GetKeyDown(KeyCode.Escape)) return;
             mouseUp?.Invoke();

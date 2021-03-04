@@ -4,14 +4,13 @@ using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using ScriptableObjects;
 using UnityEngine;
-using Utilities;
 
-namespace Grid
+namespace Utilities
 {
     /// <summary>
     /// Class to handle the integration of the c++ dll
     /// </summary>
-    public class GridExtension1
+    public class GridExtension
     {
         #region dllImports
 
@@ -64,19 +63,19 @@ namespace Grid
         private static IntPtr _costGrid;
         private static IntPtr _appealGrid;
 
-        private static int _typeDefault = (int) CellContentType.None;
-        private static int _costDefault = Int32.MaxValue;
-        private static int _appealDefault = 0;
+        private const int TypeDefault = (int) CellContentType.None;
+        private const int CostDefault = Int32.MaxValue;
+        private const int AppealDefault = 0;
 
         #endregion
 
         #region public methods
 
-        public GridExtension1(int width, int height)
+        public GridExtension(int width, int height)
         {
-            _typeGrid = CreateGrid(width, height, _typeDefault);
-            _costGrid = CreateGrid(width, height, _costDefault);
-            _appealGrid = CreateGrid(width, height, _appealDefault);
+            _typeGrid = CreateGrid(width, height, TypeDefault);
+            _costGrid = CreateGrid(width, height, CostDefault);
+            _appealGrid = CreateGrid(width, height, AppealDefault);
         }
 
         public static int GridWidth => GetWidth(_typeGrid);
@@ -87,37 +86,40 @@ namespace Grid
 
         public static bool SetCell(Vector3Int cell, CellContent content)
         {
-            if (!SetCell(_typeGrid, cell.x, cell.z, content.Width, content.Height, (int) content.Type)) return false;
-            
-            if (content.AllowsMovement)
+            var retVal = SetCell(_typeGrid, cell.x, cell.z, content.Width, content.Height, (int) content.Type);
+            if (!retVal)
             {
-                if (!SetCell(_costGrid, cell.x, cell.z, content.Width, content.Height, content.MovementCost)) return false;
+                EmptyCell(cell);
             }
             
-            if (content.HasAppeal)
+            retVal = SetCell(_costGrid, cell.x, cell.z, content.Width, content.Height, content.MovementCost);
+            if (!retVal)
             {
-                if (!SetCell(_appealGrid, cell.x, cell.z, content.Width, content.Height, content.Appeal)) return false;
+                EmptyCell(cell);
             }
-
-            return true;
-        }
-
-        public static bool EmptyCell(Vector3Int cell)
-        {
-            if (!SetCell(_typeGrid, cell.x, cell.z, 1, 1, _typeDefault)) return false;
-            if (!SetCell(_costGrid, cell.x, cell.z, 1, 1, _costDefault)) return false;
-            if (!SetCell(_appealGrid, cell.x, cell.z, 1, 1, _appealDefault)) return false;
             
-            return true;
+            retVal = SetCell(_appealGrid, cell.x, cell.z, content.Width, content.Height, content.Appeal);
+            if (!retVal)
+            {
+                EmptyCell(cell);
+            }
+            
+            return retVal;
         }
 
-        public static bool CellIsInBound(Vector3Int cell) => cell.x >= 0 && cell.x < GetWidth(_typeGrid) &&
-                                                             cell.z >= 0 && cell.z < GetHeight(_typeGrid);
+        public static bool EmptyCell(Vector3Int cell) => SetCell(_costGrid, cell.x, cell.z, 1, 1, CostDefault) 
+                                                         && SetCell(_appealGrid, cell.x, cell.z, 1, 1, AppealDefault)
+                                                         && SetCell(_typeGrid, cell.x, cell.z, 1, 1, TypeDefault);
+        
+
+        public static bool CellIsInBound(Vector3Int cell) => cell.x >= 0 
+                                                             && cell.x < GetWidth(_typeGrid) 
+                                                             && cell.z >= 0 && cell.z < GetHeight(_typeGrid);
 
         public static bool CellIsOfType(Vector3Int cell, CellContentType type) => type == GetCell(cell);
 
         public static bool CellIsFree(Vector3Int cell) =>
-            GetCoordinateContent(_typeGrid, cell.x, cell.z) == _typeDefault;
+            GetCoordinateContent(_typeGrid, cell.x, cell.z) == TypeDefault;
 
         public static CellContentType[] GetNeighborTypes(Vector3Int cell)
         {
@@ -135,7 +137,7 @@ namespace Grid
             for (var i = 0; i < neighborsArr.Length; i++)
             {
                 if (neighborsArr[i] == GetOutOfBoundsValue(_typeGrid)) continue;
-                if (neighborsArr[i] == _typeDefault)
+                if (neighborsArr[i] == TypeDefault)
                 {
                     neighborTypes[i] = CellContentType.None;
                     continue;
@@ -170,8 +172,7 @@ namespace Grid
             return retVal;
         }
 
-        public static List<Vector3Int> GetPathOfTypeBetween(Vector3Int start, Vector3Int end,
-            [CanBeNull] List<CellContentType> allowedTypes, bool useCost = false)
+        public static List<Vector3Int> GetPathOfTypeBetween(Vector3Int start, Vector3Int end, [CanBeNull] List<CellContentType> allowedTypes, bool useCost = false)
         {
             IntPtr path;
             if (allowedTypes == null)

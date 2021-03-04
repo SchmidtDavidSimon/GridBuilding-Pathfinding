@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Grid;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -200,7 +199,7 @@ namespace Utilities
                 if (alteredArray.Length == 0) return;
                 foreach (var cell in alteredArray)
                 {
-                    var neighbors = GridExtension.GetNeighborPositions(cell);
+                    var neighbors = GridExtension.GetNeighborsOfTypes(cell, null);
                     foreach (var neighbor in neighbors)
                     {
                         if (!_temporaryContents.TryGetValue(neighbor, out var neighborContent) && !_contents.TryGetValue(neighbor, out neighborContent)) continue;
@@ -344,7 +343,7 @@ namespace Utilities
             return GridExtension.GetPathOfTypeBetween(
                 (Vector3Int)_startPos,
                 (Vector3Int)_endPos,
-                content.OverwritableContentTypes.ToArray()
+                content.OverwritableContentTypes
             );
         }
     
