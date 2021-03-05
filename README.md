@@ -1,1 +1,1 @@
-# GridBuilding-Pathfinding
+A C++ dll with the functionality of a grid, showcased by an example building game.
